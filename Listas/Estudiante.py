@@ -31,6 +31,3 @@ def validar_dato(dato):
         raise ValueError("El dato no puede estar vacío.") 
     return dato
 
-def validar_numero_positivo(numero):
-    if numero <= 0:
-        raise ValueError("El número debe ser positivo.")
