@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Flask App</title>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-blue-600 text-white p-8 text-center shadow-lg">
+        <h1 class="text-4xl font-bold">Implementando Flask</h1>
+    </header>
+    <main class="flex-grow container mx-auto p-8 max-w-4xl">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <p class="text-xl text-gray-700 leading-relaxed">
+                Prueba de implementación de una aplicación web usando Flask y Tailwind CSS.
+            </p>
+            <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Empecemos! 
+            </button>
+            <p id="saludo" class="mt-4 bg-blue-700 font-bold "></p>
+        </div>
+    </main>
+    <footer class="bg-gray-800 text-white text-center p-4">
+        <p>&copy; 2025 Flask App. All rights reserved.</p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
