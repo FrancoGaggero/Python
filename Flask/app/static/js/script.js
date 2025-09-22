@@ -1,10 +1,40 @@
 // Script básico para la aplicación Flask
+// Se ejecuta cuando el DOM está completamente cargado
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Flask app cargada correctamente');
-    
-    // Mensaje de bienvenida simple
-    const saludoElement = document.getElementById('saludo');
-    if (saludoElement) {
-        saludoElement.textContent = '¡Bienvenido a Flask!';
+    // Obtener nombre para saludo por prompt
+    let nombre = prompt("Por favor, ingresa tu nombre:");
+    if (!nombre) {
+        nombre = "Invitado";
     }
+    let mensaje = `¡Bienvenido a Flask, ${nombre}!`;
+    document.getElementById("saludo").textContent = mensaje;
+
+    // Array de fondos para el botón de cambiar color
+    const fondos = [
+        "bg-red-500",
+        "bg-blue-500",
+        "bg-green-500",
+        "bg-yellow-400",
+        "bg-purple-500",
+        "bg-pink-500",
+        "bg-indigo-500",
+        "bg-teal-500",
+        "bg-orange-500",
+        "bg-cyan-500"
+    ];
+
+    // Evento para el botón cambiando el color de fondo del saludo
+    document.getElementById("colorBtn").addEventListener("click", function(){
+        const saludo = document.getElementById("saludo");
+        // Quita las clases de gradiente originales si están presentes
+        saludo.classList.remove("bg-gradient-to-r", "from-blue-500", "to-purple-600");
+        // Quita cualquier fondo sólido anterior
+        fondos.forEach(fondo => saludo.classList.remove(fondo));
+        // Elige una clase aleatoria
+        const fondoAleatorio = fondos[Math.floor(Math.random() * fondos.length)];
+        saludo.classList.add(fondoAleatorio);
+    });
+
+    console.log('Flask app cargada correctamente');
 });
