@@ -1,17 +1,9 @@
-"""
-horoscopo_logic.py
-Lógica para determinar signos zodiacales según fecha de nacimiento
 
-Funcionalidades:
-1. Almacenar información de los 12 signos (nombre, fechas, elemento)
-2. Determinar el signo según una fecha
-3. Devolver información detallada del signo
-"""
 
 from datetime import datetime
 
-# Estructura de datos para los signos zodiacales
-# Usando lista de diccionarios para facilitar la iteración
+
+#Lista de diccionarios
 SIGNOS_ZODIACALES = [
     {
         "nombre": "Aries",
@@ -114,49 +106,41 @@ SIGNOS_ZODIACALES = [
 # TODO: Implementar estas funciones (¡TU TURNO!)
 
 def obtener_signo(fecha_nacimiento):
-    """
-    Determina el signo zodiacal según la fecha de nacimiento
-    
-    Args:
-        fecha_nacimiento (str): Fecha en formato 'YYYY-MM-DD'
-        
-    Returns:
-        dict: Información del signo o None si hay error
-    """
+
     try:
-        print(f"DEBUG: Procesando fecha: {fecha_nacimiento}")
+        
         # Convertir string a datetime
         fecha = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
         mes = fecha.month
         dia = fecha.day
-        print(f"DEBUG: Mes: {mes}, Día: {dia}")
+        
         
         # Buscar el signo correspondiente
         for signo in SIGNOS_ZODIACALES:
             inicio_mes, inicio_dia = signo['inicio']
             fin_mes, fin_dia = signo['fin']
             
-            print(f"DEBUG: Comparando con {signo['nombre']}: {inicio_mes}/{inicio_dia} - {fin_mes}/{fin_dia}")
+            
             
             # Caso especial para Capricornio (cruza el año)
             if inicio_mes > fin_mes:  # Capricornio: diciembre a enero
                 if (mes == inicio_mes and dia >= inicio_dia) or (mes == fin_mes and dia <= fin_dia):
-                    print(f"DEBUG: Encontrado signo (caso especial): {signo['nombre']}")
+                    
                     return signo
             else:
                 # Casos normales
                 if mes == inicio_mes and mes == fin_mes:
                     # Mismo mes
                     if inicio_dia <= dia <= fin_dia:
-                        print(f"DEBUG: Encontrado signo (mismo mes): {signo['nombre']}")
+                        
                         return signo
                 elif mes == inicio_mes and dia >= inicio_dia:
                     # Mes de inicio
-                    print(f"DEBUG: Encontrado signo (mes inicio): {signo['nombre']}")
+                    
                     return signo
                 elif mes == fin_mes and dia <= fin_dia:
                     # Mes de fin
-                    print(f"DEBUG: Encontrado signo (mes fin): {signo['nombre']}")
+                    
                     return signo
         
         print("DEBUG: No se encontró signo")
@@ -167,15 +151,7 @@ def obtener_signo(fecha_nacimiento):
         return None
 
 def validar_fecha(fecha_string):
-    """
-    Valida que la fecha esté en formato correcto
     
-    Args:
-        fecha_string (str): Fecha a validar
-        
-    Returns:
-        tuple: (es_valida, fecha_datetime, error_mensaje)
-    """
     try:
         fecha = datetime.strptime(fecha_string, '%Y-%m-%d')
         
@@ -193,15 +169,7 @@ def validar_fecha(fecha_string):
         return (False, None, "Formato de fecha inválido. Use YYYY-MM-DD")
 
 def formatear_informacion_signo(signo_info):
-    """
-    Formatea la información del signo para mostrar en la web
-    
-    Args:
-        signo_info (dict): Información del signo
-        
-    Returns:
-        str: Texto formateado para mostrar
-    """
+
     if not signo_info:
         return "No se pudo determinar el signo zodiacal"
         

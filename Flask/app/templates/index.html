@@ -5,15 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Flask App - Proyecto de Aprendizaje</title>
+    <style>
+        /* Animación flotante para la nave */
+        @keyframes floating {
+            0% { transform: translateY(10px); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(10px); }
+        }
+        
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        /* Animación shake para botones */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            10% { transform: translateX(-20); }
+            20% { transform: translateX(20px); }
+            30% { transform: translateX(-20px); }
+            40% { transform: translateX(20px); }
+            50% { transform: translateX(-10px); }
+            60% { transform: translateX(10px); }
+            70% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+            90% { transform: translateX(-4px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.9s ease-in-out;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-900 min-h-screen">
-    
     <!-- Header mejorado -->
     <header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 shadow-xl">
 
         <div class="container mx-auto text-center mb-4">
-            <h1 class="text-5xl font-bold mb-2">🚀 Flask Learning Project</h1>
-            
+            <div class="flex items-center justify-center gap-4">
+                <!-- Imagen de la nave con efecto flotante -->
+                <img src="{{ url_for('static', filename='images/ship.png') }}" 
+                     alt="Nave espacial" 
+                     class="h-16 w-auto floating-animation">
+                <!-- Título del proyecto -->
+                <h1 class="text-5xl font-bold">Flask Learning Project</h1>
+            </div>
         </div>
 
         <div class="container mx-auto text-center mt-12">
@@ -39,8 +75,7 @@
     </header>
 
     <!-- Main content con layout de cards -->
-    <main class="container mx-auto p-8 max-w-7xl">
-        
+    <main class="container mx-auto p-8 max-w-7xl">        
         <!-- Grid principal de 2 columnas -->
         <div class="grid lg:grid-cols-2 gap-8">
             
@@ -62,7 +97,7 @@
                         <div class="border-2 border-blue-200 rounded-lg p-4 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <span class="text-3xl mr-4">🧮</span>
+                                    <img src="{{ url_for('static', filename='images/calculator.png') }}" alt="Calculadora" class="h-10 w-10 mr-4">
                                     <div>
                                         <h3 class="text-lg font-bold text-gray-800">Calculadora Completa</h3>
                                         <p class="text-sm text-gray-600">Operaciones matemáticas básicas</p>
@@ -86,7 +121,7 @@
                         <div class="border-2 border-blue-200 rounded-lg p-4 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <span class="text-3xl mr-4">♓</span>
+                                    <img src="{{ url_for('static', filename='images/signos.png') }}" alt="Horóscopo" class="h-10 w-10 mr-4">
                                     <div>
                                         <h3 class="text-lg font-bold text-gray-800">Horóscopo</h3>
                                         <p class="text-sm text-gray-600">Descubre tu signo según tu fecha</p>
@@ -107,15 +142,15 @@
                         <div class="border-2 border-gray-200 rounded-lg p-4 opacity-60">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <span class="text-3xl mr-4">🎯</span>
+                                    <img src="{{ url_for('static', filename='images/next.png') }}" alt="próximamente" class="h-10 w-10 mr-4">
                                     <div>
-                                        <h3 class="text-lg font-bold text-gray-800">Más Aplicaciones</h3>
+                                        <h3 class="text-lg font-bold text-gray-800">Más funcionalidades</h3>
                                         <p class="text-sm text-gray-600">Nuevas funcionalidades en camino</p>
                                     </div>
                                 </div>
-                                <div class="bg-gray-300 text-gray-500 font-bold py-2 px-4 rounded-lg cursor-not-allowed">
+                                <button id="noBtn" class="bg-gray-300 text-gray-500 font-bold py-2 px-4 rounded-lg ">
                                     En desarrollo
-                                </div>
+                                </button>
                             </div>
                         </div>
                         
@@ -144,7 +179,7 @@
                         <div class="grid grid-cols-2 gap-3">
                             <div class="bg-red-50 border border-red-200 rounded-lg p-3 hover:shadow-md transition-shadow">
                                 <div class="flex items-center">
-                                    <span class="text-xl mr-2">🐍</span>
+                                    <img src="{{ url_for('static', filename='images/python.png') }}" alt="Python" class="h-10 w-10 mr-4">
                                     <div>
                                         <p class="font-semibold text-red-800">Python 3.13</p>
                                         <p class="text-xs text-red-600">Backend Logic</p>
@@ -258,7 +293,7 @@
                                 <span class="bg-green-100 text-green-800 text-sm px-2 py-1 rounded">En desarrollo</span>
                             </div>
                             <div class="bg-green-200 rounded-full h-3 mb-2">
-                                <div class="bg-green-500 h-3 rounded-full" style="width: 45%"></div>
+                                <div class="bg-green-500 h-3 rounded-full" style="width: 55%"></div>
                             </div>
                             <div class="grid grid-cols-2 gap-2 text-sm">
                                 <div class="flex items-center">
@@ -279,10 +314,22 @@
     </main>
 
     <!-- Footer mejorado -->
-    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+    <footer class="bg-gray-800 text-white p-6 mt-12">
         <div class="container mx-auto">
-            <p class="text-lg mb-2">&copy; 2025 Flask Learning Project </p>
-            <p class="text-sm opacity-75"> 🚀 Python, Flask y Tailwind CSS</p>
+            <div class="flex justify-between items-center">
+                <!-- Div izquierdo - Información del proyecto -->
+                <div class="text-left">
+                    <p class="text-lg mb-2">&copy; 2025 Flask Learning Project</p>
+                    <p class="text-sm opacity-75">🚀 Python, Flask y Tailwind CSS</p>
+                </div>
+
+                <!-- Div derecho - Logo/Imagen -->
+                <div class="text-right">
+                    <img src="{{ url_for('static', filename='images/computer.png') }}" 
+                         alt="Logo del proyecto" 
+                         class="h-16 w-auto">    
+                </div>
+            </div>
         </div>
     </footer>
 

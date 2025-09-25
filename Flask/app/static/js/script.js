@@ -10,6 +10,26 @@ document.addEventListener('DOMContentLoaded', function() {
     let mensaje = `¡Bienvenido a Flask, ${nombre}!`;
     document.getElementById("saludo").textContent = mensaje;
 
+
+    localStorage.setItem('usuario', nombre);
+    document.getElementById("saludo").textContent = `¡Bienvenido de nuevo, ${nombre}!`;
+
+
+    // Evento para el botón "En desarrollo"
+    document.getElementById("noBtn").addEventListener("click", function(){
+        // Quitar cualquier animación previa
+        this.classList.remove("animate-shake");
+        
+        // Forzar el reflow para que la eliminación de clase tome efecto
+        void this.offsetWidth;
+
+        this.classList.add("animate-shake");
+        //limpiar clase 
+        setTimeout(() => {
+            this.classList.remove("animate-shake");
+        }, 600); // 600ms coincide con la duración de la animación CSS
+    });
+
     // Array de fondos para el botón de cambiar color
     const fondos = [
         "bg-red-500",
@@ -21,7 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
         "bg-indigo-500",
         "bg-teal-500",
         "bg-orange-500",
-        "bg-cyan-500"
+        "bg-cyan-500",
+        "bg-lime-500",
+        "bg-rose-500",
+        "bg-violet-500",
+        "bg-fuchsia-500",
+        "bg-emerald-500",
+        "bg-black-500",
+        "#ffffff",
+        "#000000"
     ];
 
     // Evento para el botón cambiando el color de fondo del saludo
