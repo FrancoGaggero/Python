@@ -12,6 +12,8 @@ def index():
 
 
 
+
+
 def horoscopo():
     
     resultado = None
