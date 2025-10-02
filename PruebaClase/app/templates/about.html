@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de Nosotros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold">Mi Proyecto Flask</h1>
+                <a href="{{ url_for('main.home') }}" 
+                   class="bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-md">
+                    ← Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-bold text-gray-800 mb-6">Acerca de Este Proyecto</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Un proyecto educativo desarrollado con Flask y Python, utilizando Blueprints para una 
+                arquitectura modular y escalable.
+            </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition duration-300">
+                <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Flask & Python</h3>
+                <p class="text-gray-600">Desarrollo backend robusto utilizando el framework Flask de Python para crear aplicaciones web dinámicas.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition duration-300">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Blueprints</h3>
+                <p class="text-gray-600">Arquitectura modular usando Flask Blueprints para organizar y estructurar mejor el código de la aplicación.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition duration-300">
+                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Tailwind CSS</h3>
+                <p class="text-gray-600">Diseño moderno y responsivo utilizando Tailwind CSS para crear interfaces atractivas y funcionales.</p>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="bg-white rounded-xl shadow-lg p-12 mb-16">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-6">¿Qué hace este proyecto?</h3>
+                    <div class="space-y-4 text-gray-600">
+                        <p class="flex items-start">
+                            <span class="text-purple-500 mr-3 mt-1">•</span>
+                            Gestión de usuarios con funcionalidades CRUD
+                        </p>
+                        <p class="flex items-start">
+                            <span class="text-purple-500 mr-3 mt-1">•</span>
+                            Visualización de datos de alumnos y usuarios
+                        </p>
+                        <p class="flex items-start">
+                            <span class="text-purple-500 mr-3 mt-1">•</span>
+                            Navegación intuitiva entre diferentes secciones
+                        </p>
+                        <p class="flex items-start">
+                            <span class="text-purple-500 mr-3 mt-1">•</span>
+                            Diseño responsivo y moderno
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl p-8 text-white">
+                    <h4 class="text-2xl font-bold mb-4">Tecnologías Utilizadas</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
+                            <div class="font-semibold">Flask</div>
+                            <div class="text-sm opacity-90">Framework Web</div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
+                            <div class="font-semibold">Python</div>
+                            <div class="text-sm opacity-90">Backend</div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
+                            <div class="font-semibold">Jinja2</div>
+                            <div class="text-sm opacity-90">Templates</div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
+                            <div class="font-semibold">Tailwind</div>
+                            <div class="text-sm opacity-90">CSS Framework</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">© 2024 Mi Proyecto Flask - Desarrollado con ❤️ usando Flask y Tailwind CSS</p>
+        </div>
+    </footer>
+</body>
+</html>

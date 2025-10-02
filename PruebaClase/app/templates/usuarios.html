@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold">Mi Proyecto Flask</h1>
+                <a href="{{ url_for('main.home') }}" 
+                   class="bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-md">
+                    ← Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Welcome Card -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Panel de Usuarios</h2>
+                <p class="text-xl text-gray-600">Gestiona y visualiza la información de usuarios y alumnos</p>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="bg-purple-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-800">{{ usuarios|length }}</h3>
+                        <p class="text-gray-600">Total de Usuarios</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-800">{{ alumnos|length }}</h3>
+                        <p class="text-gray-600">Total de Alumnos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lists Section -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Usuarios List -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-purple-500 to-purple-600 p-6">
+                    <h3 class="text-2xl font-bold text-white flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                        Lista de Usuarios
+                    </h3>
+                </div>
+                <div class="p-6">
+                    {% if usuarios %}
+                        <ul class="space-y-3">
+                            {% for usuario in usuarios %}
+                                <li class="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition duration-200">
+                                    <div class="bg-purple-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mr-3">
+                                        {{ loop.index }}
+                                    </div>
+                                    <span class="text-gray-800 font-medium">{{ usuario }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="text-center py-8">
+                            <p class="text-gray-500 text-lg">No hay usuarios registrados</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Alumnos List -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+                    <h3 class="text-2xl font-bold text-white flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        Lista de Alumnos
+                    </h3>
+                </div>
+                <div class="p-6">
+                    {% if alumnos %}
+                        <ul class="space-y-3">
+                            {% for alumno in alumnos %}
+                                <li class="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition duration-200">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4">
+                                                {{ alumno.nombre[0].upper() }}
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-800">{{ alumno.nombre }}</h4>
+                                                <p class="text-sm text-gray-600">Estudiante</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                                                {{ alumno.edad }} años
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="text-center py-8">
+                            <p class="text-gray-500 text-lg">No hay alumnos registrados</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info Section -->
+        <div class="mt-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl p-8 text-white">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Información del Sistema</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                        <h4 class="font-bold text-lg">Usuarios Activos</h4>
+                        <p class="text-2xl font-bold">{{ usuarios|length }}</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                        <h4 class="font-bold text-lg">Alumnos Registrados</h4>
+                        <p class="text-2xl font-bold">{{ alumnos|length }}</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                        <h4 class="font-bold text-lg">Usuario Actual</h4>
+                        <p class="text-lg font-semibold">{{ nombre }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">© 2024 Sistema de Usuarios - Proyecto Flask</p>
+        </div>
+    </footer>
+</body>
+</html>
