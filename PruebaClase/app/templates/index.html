@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanSA - Productos Higiénicos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'smoke-white': '#F9FAFB',        // 60% - Blanco humo (fondo general)
+                        'pro-blue': '#2563EB',           // 30% - Azul profesional (botones, encabezados)
+                        'dark-teal': '#1E3A8A',          // 10% - Azul petróleo oscuro (acentos, hover)
+                        // Mantener colores originales por compatibilidad
+                        'clean-blue': '#0077BE',
+                        'clean-green': '#00C851',
+                        'clean-light': '#F5F8FA',
+                        'clean-gray': '#6C757D'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilos iniciales para animaciones */
+        #hero-section {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        .nav-card {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body class="bg-smoke-white min-h-screen" data-page="home">
+    
+    <!-- Header -->
+    <header class="bg-smoke-white shadow-lg border-b-2 border-pro-blue">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div id="main-title" class="flex items-center">
+                    <div class="bg-pro-blue rounded-lg p-2 mr-4">
+                        <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <div class="text-lg">
+                        <h1 class="text-3xl font-bold text-dark-teal">CleanSA</h1>
+                        <p class="text-pro-blue text-sm">Productos Higiénicos de Calidad</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                  
+                    <a href="{{ url_for('auth.index') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">Iniciar Sesión</a>
+                    <div class="w-2 h-2 bg-pro-blue rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 max-w-6xl page-content">
+        
+        <!-- Hero Section -->
+        <div id="hero-section" class="bg-smoke-white rounded-2xl shadow-lg p-8 text-center mb-16 fade-in border border-pro-blue">
+            <h2 class="text-4xl md:text-5xl font-bold text-dark-teal mb-4">
+                Bienvenido a <span class="text-pro-blue">CleanSA</span>
+            </h2>
+            <p class="text-xl text-pro-blue mb-8 max-w-3xl mx-auto">
+                Tu empresa líder en productos higiénicos de alta calidad. Accede a nuestro sistema de gestión integral.
+            </p>
+        </div>
+
+        <!-- Navigation Cards -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            
+            <!-- About Card -->
+            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-pro-blue">
+                <div class="bg-pro-blue p-6 text-smoke-white">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="bg-smoke-white bg-opacity-20 rounded-full p-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center">Acerca de</h3>
+                    <p class="text-center mt-2 opacity-90">Información de la empresa</p>
+                </div>
+                <div class="p-6 bg-smoke-white">
+                    <p class="text-pro-blue mb-6 text-center">
+                        Conoce más sobre CleanSA, nuestra historia, misión y valores empresariales.
+                    </p>
+                    <a href="{{ url_for('main.about') }}" 
+                       class="block w-full bg-pro-blue hover:bg-dark-teal text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300">
+                        Ver Información
+                    </a>
+                </div>
+            </div>
+
+            <!-- Usuarios/Alumnos Card -->
+            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-pro-blue">
+                <div class="bg-dark-teal p-6 text-smoke-white">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="bg-smoke-white rounded-full p-4 shadow-md">
+                            <svg class="w-8 h-8 text-dark-teal" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.996 2.996 0 0 0 17.05 7H16c-.8 0-1.54.31-2.1.83l-3.88 3.88C9.43 12.3 9 13.1 9 14v6h2v-6c0-.55.45-1 1-1h1v7h7zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6C4.67 6 4 6.67 4 7.5S4.67 9 5.5 9 7 8.33 7 7.5 6.33 6 5.5 6zm.5 9.5c0-.83-.67-1.5-1.5-1.5S3 14.67 3 15.5 3.67 17 4.5 17 6 16.33 6 15.5zm0 0V18c0 1.1.9 2 2 2h3v-2H8v-2.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center">Usuarios</h3>
+                    <p class="text-center mt-2">Gestión de usuarios</p>
+                </div>
+                <div class="p-6 bg-smoke-white">
+                    <p class="text-pro-blue mb-6 text-center">
+                        Administra los usuarios del sistema, clientes y personal autorizado.
+                    </p>
+                    <a href="{{ url_for('users.list_users') }}" 
+                       class="block w-full bg-dark-teal hover:bg-pro-blue text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300 border">
+                        Gestionar Usuarios
+                    </a>
+                </div>
+            </div>
+
+            <!-- Empleados Card -->
+            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-pro-blue">
+                <div class="bg-pro-blue p-6 text-smoke-white">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="bg-smoke-white bg-opacity-20 rounded-full p-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center">Empleados</h3>
+                    <p class="text-center mt-2 opacity-90">Gestión de personal</p>
+                </div>
+                <div class="p-6 bg-smoke-white">
+                    <p class="text-pro-blue mb-6 text-center">
+                        Administra la información del personal de CleanSA y sus departamentos.
+                    </p>
+                    <a href="{{ url_for('employees.list_employees') }}" 
+                       class="block w-full bg-pro-blue hover:bg-dark-teal text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300">
+                        Ver Empleados
+                    </a>
+                </div>
+            </div>
+            <!---Productos card-->
+
+            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-pro-blue">
+                <div class="bg-dark-teal p-6 text-smoke-white">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="bg-smoke-white bg-opacity-20 rounded-full p-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center">Catálogo</h3>
+                    <p class="text-center mt-2 opacity-90">Gestión de productos</p>
+                </div>
+                <div class="p-6 bg-smoke-white">
+                    <p class="text-pro-blue mb-6 text-center">
+                        Administra la información de los productos de CleanSA.
+                    </p>
+                    <a href="{{ url_for('products.list_products') }}" 
+                       class="block w-full bg-dark-teal hover:bg-pro-blue text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300">
+                        Ver Productos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Information Section -->
+        <div class="bg-smoke-white rounded-2xl shadow-xl overflow-hidden border border-pro-blue">
+            <div class="bg-dark-teal text-smoke-white p-8">
+                <h3 class="text-3xl font-bold text-center mb-4">CleanSA - Calidad que Perdura</h3>
+                <p class="text-center text-pro-blue text-lg max-w-3xl mx-auto opacity-90">
+                    Comprometidos con la higiene y limpieza desde hace más de una década
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 p-8">
+                <!-- Productos -->
+                <div  class="text-center p-6 bg-smoke-white rounded-xl border border-pro-blue">
+                    <div class="bg-pro-blue rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2L7.5 3.5L6 2H4.5C3.67 2 3 2.67 3 3.5v17C3 21.33 3.67 22 4.5 22H6l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22h-1.5c.83 0 1.5-.67 1.5-1.5v-17c0-.83-.67-1.5-1.5-1.5H19.5z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-dark-teal mb-2">Productos</h4>
+                    <p class="text-pro-blue">Amplia gama de productos de limpieza</p>
+                </div>
+
+                <!-- Calidad -->
+                <div class="text-center p-6 bg-smoke-white rounded-xl border border-pro-blue">
+                    <div class="bg-dark-teal rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-dark-teal mb-2">Calidad</h4>
+                    <p class="text-pro-blue">Certificaciones internacionales</p>
+                </div>
+
+                <!-- Servicio -->
+                <div class="text-center p-6 bg-smoke-white rounded-xl border border-pro-blue">
+                    <div class="bg-pro-blue rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-dark-teal mb-2">Servicio</h4>
+                    <p class="text-pro-blue">Atención al cliente 24/7</p>
+                </div>
+
+                <!-- Sostenibilidad -->
+                <div class="text-center p-6 bg-smoke-white rounded-xl border border-pro-blue">
+                    <div class="bg-dark-teal rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66c.71-2.04 1.53-4.83 2.6-7.34C10.84 19.25 12 22 12 22s1.16-2.75 3.69-7.34c1.07 2.51 1.89 5.3 2.6 7.34l1.89-.66C18.1 16.17 16 10 17 8zm-2 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-dark-teal mb-2">Eco-Friendly</h4>
+                    <p class="text-pro-blue">Productos biodegradables</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-teal text-smoke-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <div class="bg-pro-blue rounded-lg p-2 mr-3">
+                    <svg class="w-6 h-6 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold">CleanSA</span>
+            </div>
+            <p class="text-pro-blue opacity-80">© 2024 CleanSA - Productos Higiénicos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    <!-- Librerías externas -->
+    <script src="{{ url_for('static', filename='js/anime.min.js') }}"></script>
+    
+    <!-- Scripts principales de CleanSA -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

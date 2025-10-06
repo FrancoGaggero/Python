@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanSA - Panel de Administración</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'clean-blue': '#0077BE',
+                        'clean-green': '#00C851',
+                        'clean-light': '#F5F8FA',
+                        'clean-gray': '#6C757D'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Header/Navbar -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                
+                <!-- Logo y título -->
+                <div class="flex items-center">
+                    <div class="bg-clean-blue rounded-lg p-2 mr-4">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">CleanSA Admin</h1>
+                        <p class="text-sm text-clean-gray">Panel de Administración</p>
+                    </div>
+                </div>
+
+                <!-- Navegación superior -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-5h-5l5-5 5 5h-5v5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm text-gray-700">Admin Usuario</span>
+                        <div class="w-8 h-8 bg-clean-blue rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-medium">AU</span>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('main.home') }}" 
+                       class="bg-clean-gray hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Salir
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Título de bienvenida -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Dashboard CleanSA</h2>
+            <p class="text-clean-gray">Resumen general del sistema de gestión</p>
+        </div>
+
+        <!-- Tarjetas de estadísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            
+            <!-- Total Productos -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-clean-blue">
+                <div class="flex items-center">
+                    <div class="bg-blue-100 rounded-full p-3 mr-4">
+                        <svg class="w-8 h-8 text-clean-blue" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 7H18V6C18 5.45 17.55 5 17 5H7C6.45 5 6 5.45 6 6V7H5C3.9 7 3 7.9 3 9V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7 19 7Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">156</p>
+                        <p class="text-clean-gray text-sm">Total Productos</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-green-600 text-sm font-medium">+12% este mes</span>
+                </div>
+            </div>
+
+            <!-- Total Empleados -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-clean-green">
+                <div class="flex items-center">
+                    <div class="bg-green-100 rounded-full p-3 mr-4">
+                        <svg class="w-8 h-8 text-clean-green" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">23</p>
+                        <p class="text-clean-gray text-sm">Empleados Activos</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-green-600 text-sm font-medium">+2 nuevos</span>
+                </div>
+            </div>
+
+            <!-- Ventas del Mes -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500">
+                <div class="flex items-center">
+                    <div class="bg-purple-100 rounded-full p-3 mr-4">
+                        <svg class="w-8 h-8 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">$45,630</p>
+                        <p class="text-clean-gray text-sm">Ventas Mensuales</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-green-600 text-sm font-medium">+18% vs mes anterior</span>
+                </div>
+            </div>
+
+            <!-- Órdenes Pendientes -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500">
+                <div class="flex items-center">
+                    <div class="bg-orange-100 rounded-full p-3 mr-4">
+                        <svg class="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17L5 13L6.41 11.59L9 14.17L17.59 5.58L19 7L9 17Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-3xl font-bold text-gray-900">8</p>
+                        <p class="text-clean-gray text-sm">Órdenes Pendientes</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-orange-600 text-sm font-medium">Requieren atención</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sección de acciones rápidas -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            
+            <!-- Acciones Rápidas -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-clean-blue" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M13 3C15.21 3 17 4.79 17 7C17 9.21 15.21 11 13 11C10.79 11 9 9.21 9 7C9 4.79 10.79 3 13 3ZM4 14V19H2V14H4ZM9 14V19H7V14H9ZM14 14V19H12V14H14ZM19 14V19H17V14H19Z"/>
+                    </svg>
+                    Acciones Rápidas
+                </h3>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <a href="{{ url_for('products.list_products') }}" 
+                       class="bg-clean-blue hover:bg-blue-700 text-white p-4 rounded-lg text-center transition-colors group">
+                        <svg class="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 7H18V6C18 5.45 17.55 5 17 5H7C6.45 5 6 5.45 6 6V7H5C3.9 7 3 7.9 3 9V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7 19 7Z"/>
+                        </svg>
+                        <p class="font-medium">Gestionar Productos</p>
+                    </a>
+                    
+                    <a href="{{ url_for('employees.list_employees') }}" 
+                       class="bg-clean-green hover:bg-green-700 text-white p-4 rounded-lg text-center transition-colors group">
+                        <svg class="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <p class="font-medium">Gestionar Empleados</p>
+                    </a>
+                    
+                    <a href="{{ url_for('users.list_users') }}" 
+                       class="bg-purple-500 hover:bg-purple-700 text-white p-4 rounded-lg text-center transition-colors group">
+                        <svg class="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 4C16 2.9 15.1 2 14 2H10C8.9 2 8 2.9 8 4V6H6V4C6 1.79 7.79 0 10 0H14C16.21 0 18 1.79 18 4V6H16V4ZM20 8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V10C22 8.9 21.1 8 20 8Z"/>
+                        </svg>
+                        <p class="font-medium">Gestionar Usuarios</p>
+                    </a>
+                    
+                    <button class="bg-orange-500 hover:bg-orange-700 text-white p-4 rounded-lg text-center transition-colors group">
+                        <svg class="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM14 17H7V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z"/>
+                        </svg>
+                        <p class="font-medium">Generar Reportes</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Actividad Reciente -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-clean-green" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    Actividad Reciente
+                </h3>
+                
+                <div class="space-y-4">
+                    <!-- Elemento de actividad -->
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="bg-clean-blue rounded-full p-2 mr-3">
+                            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Nuevo producto agregado</p>
+                            <p class="text-xs text-gray-500">Detergente Ecológico - hace 2 horas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="bg-clean-green rounded-full p-2 mr-3">
+                            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Nuevo empleado registrado</p>
+                            <p class="text-xs text-gray-500">María González - hace 1 día</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="bg-purple-500 rounded-full p-2 mr-3">
+                            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Stock actualizado</p>
+                            <p class="text-xs text-gray-500">15 productos restockados - hace 3 días</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Gráfico simple (placeholder) -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                <svg class="w-6 h-6 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 9.2H3V19H5V9.2ZM10.6 5H8.4V19H10.6V5ZM16.2 13H14V19H16.2V13ZM21.8 8H19.6V19H21.8V8Z"/>
+                </svg>
+                Resumen de Ventas
+            </h3>
+            
+            <!-- Placeholder para gráfico -->
+            <div class="bg-gradient-to-r from-clean-blue to-clean-green rounded-lg p-8 text-center">
+                <div class="text-white">
+                    <h4 class="text-2xl font-bold mb-2">Ventas en Crecimiento</h4>
+                    <p class="text-lg opacity-90">+25% comparado con el mes anterior</p>
+                    <div class="mt-4 flex justify-center space-x-8">
+                        <div>
+                            <p class="text-3xl font-bold">$45,630</p>
+                            <p class="text-sm opacity-80">Este Mes</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold">$36,480</p>
+                            <p class="text-sm opacity-80">Mes Anterior</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
