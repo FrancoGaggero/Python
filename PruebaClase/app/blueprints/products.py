@@ -48,4 +48,4 @@ PRODUCTOS_EJEMPLO = [
 def list_products():
     """Mostrar productos - versión simple"""
     print(f"Mostrando {len(PRODUCTOS_EJEMPLO)} productos")
-    return render_template('productos_simple.html', productos=PRODUCTOS_EJEMPLO)
+    return render_template('productos.html', productos=PRODUCTOS_EJEMPLO)

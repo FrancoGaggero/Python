@@ -3,382 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleanSA - Catálogo de Productos</title>
+    <title>CleanSA - Productos</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'clean-blue': '#0077BE',
-                        'clean-green': '#00C851',
-                        'clean-light': '#F5F8FA',
-                        'clean-gray': '#6C757D'
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="bg-gradient-to-br from-clean-light to-blue-50 min-h-screen">
+<body class="bg-gray-50 min-h-screen">
     
-    <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
+    <header class="bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg">
         <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="bg-clean-blue rounded-lg p-2 mr-4">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-3xl font-bold text-clean-blue">CleanSA</h1>
-                        <p class="text-clean-gray text-sm">Catálogo de Productos</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="bg-clean-green text-white px-4 py-2 rounded-lg text-sm font-medium">
-                        {% if productos %}
-                            {{ productos|length }} Productos
-                        {% else %}
-                            0 Productos
-                        {% endif %}
-                    </div>
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold">Mi Proyecto Flask</h1>
                 <a href="{{ url_for('main.home') }}" 
                    class="bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-md">
                     ← Volver al Inicio
                 </a>
-                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-8 max-w-7xl">
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-6">
         
-        <!-- Page Title & Description -->
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                Catálogo de <span class="text-clean-blue">Productos</span>
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold text-gray-800">
+                Catálogo de Productos ({{ productos|length }} items)
             </h2>
-            <p class="text-xl text-clean-gray max-w-3xl mx-auto">
-                Nuestra gama completa de productos higiénicos de alta calidad para el cuidado personal y del hogar
-            </p>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-clean-blue">
-                <div class="flex items-center">
-                    <div class="bg-blue-100 rounded-full p-3 mr-4">
-                        <svg class="w-6 h-6 text-clean-blue" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M7 4V2C7 1.45 7.45 1 8 1S9 1.55 9 2V4H15V2C15 1.45 15.45 1 16 1S17 1.55 17 2V4H20C21.1 4 22 4.9 22 6V20C22 21.1 21.1 22 20 22H4C2.9 22 2 21.1 2 20V6C2 4.9 2.9 4 4 4H7Z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-2xl font-bold text-gray-800">{{ (productos|length) if productos else 0 }}</p>
-                        <p class="text-clean-gray text-sm">Total Productos</p>
-                    </div>
+        <!-- Lista de Productos -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for producto in productos %}
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">{{ producto.nombre }}</h3>
+                    <p class="text-gray-600 text-sm">{{ producto.descripcion }}</p>
                 </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-clean-green">
-                <div class="flex items-center">
-                    <div class="bg-green-100 rounded-full p-3 mr-4">
-                        <svg class="w-6 h-6 text-clean-green" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
+                
+                <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-2xl font-bold text-gray-800">
-                            {% set disponibles = productos | selectattr('3', '>', 0) | list %}
-                            {{ disponibles|length }}
-                        </p>
-                        <p class="text-clean-gray text-sm">Disponibles</p>
+                        <span class="text-2xl font-bold text-green-600">${{ "%.2f"|format(producto.precio) }}</span>
+                        <div class="text-sm text-gray-500">Stock: {{ producto.stock }} unidades</div>
                     </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500">
-                <div class="flex items-center">
-                    <div class="bg-orange-100 rounded-full p-3 mr-4">
-                        <svg class="w-6 h-6 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1L13.5 2.5L16.17 5.33L10.5 11H6V8H4V11C4 12.1 4.9 13 6 13H7V22H9V13H10.5L12.5 15L11 16.5L12.5 18L17 13.5L21 9Z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-2xl font-bold text-gray-800">
-                            {% set agotados = productos | selectattr('3', '==', 0) | list %}
-                            {{ agotados|length }}
-                        </p>
-                        <p class="text-clean-gray text-sm">Agotados</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500">
-                <div class="flex items-center">
-                    <div class="bg-purple-100 rounded-full p-3 mr-4">
-                        <svg class="w-6 h-6 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-2xl font-bold text-gray-800">
-                            ${% set total = productos | sum(attribute='2') %}{{ "%.2f"|format(total) }}
-                        </p>
-                        <p class="text-clean-gray text-sm">Valor Total</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Products Table -->
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-clean-blue to-blue-600 text-white p-6">
-                <h3 class="text-2xl font-bold flex items-center">
-                    <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 7H18V6C18 5.45 17.55 5 17 5H7C6.45 5 6 5.45 6 6V7H5C3.9 7 3 7.9 3 9V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7 19 7ZM8 7V6H16V7H8Z"/>
-                    </svg>
-                    Inventario de Productos
-                </h3>
-                <p class="opacity-90 mt-2">Gestión completa del catálogo de productos CleanSA</p>
-            </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">
-                                    <span class="text-lg mr-2">🆔</span>
-                                    ID
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">
-                                    <span class="text-lg mr-2">🧴</span>
-                                    Producto
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">
-                                    <span class="text-lg mr-2">💰</span>
-                                    Precio
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">
-                                    <span class="text-lg mr-2">📦</span>
-                                    Stock
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Estado
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        {% if productos and productos|length > 0 %}
-                            {% for producto in productos %}
-                            <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                <!-- ID -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="bg-clean-blue text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
-                                            {{ producto.id }}
-                                        </div>
-                                    </div>
-                                </td>
-                                
-                                <!-- Nombre y Descripción -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="bg-gradient-to-r from-clean-light to-blue-100 rounded-lg p-2 mr-3">
-                                            <svg class="w-6 h-6 text-clean-blue" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <div class="text-lg font-semibold text-gray-900">{{ producto.nombre }}</div>
-                                            <div class="text-sm text-clean-gray">{{ producto.descripcion }}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                
-                                <!-- Precio -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-xl font-bold text-clean-green">${{ "%.2f"|format(producto.precio) }}</div>
-                                    <div class="text-sm text-gray-500">ARS</div>
-                                </td>
-                                
-                                <!-- Stock -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        {% if producto.stock > 10 %}
-                                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                            {{ producto.stock }} unidades
-                                        </div>
-                                        {% elif producto.stock > 0 %}
-                                        <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                                            {{ producto.stock }} unidades
-                                        </div>
-                                        {% else %}
-                                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
-                                            Sin stock
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </td>
-                                
-                                <!-- Estado -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {% if producto.stock > 10 %}
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                                        Disponible
-                                    </span>
-                                    {% elif producto.stock > 0 %}
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                                        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
-                                        Poco Stock
-                                    </span>
-                                    {% else %}
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                        <span class="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
-                                        Sin Stock
-                                    </span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% endfor %}
+                    
+                    <div class="flex flex-col items-end">
+                        {% if producto.stock > 0 %}
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
+                                Disponible
+                            </span>
                         {% else %}
-                            <!-- Mensaje cuando no hay productos -->
-                            <tr>
-                                <td colspan="5" class="px-6 py-12 text-center">
-                                    <div class="flex flex-col items-center">
-                                        <div class="bg-gray-100 rounded-full p-4 mb-4">
-                                            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay productos disponibles</h3>
-                                        <p class="text-gray-500">El catálogo está vacío en este momento.</p>
-                                    </div>
-                                </td>
-                            </tr>
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">
+                                Sin Stock
+                            </span>
                         {% endif %}
-                                        <div class="text-lg font-semibold text-gray-900">{{ producto.nombre }}</div>
-                                        <div class="text-sm text-clean-gray">
-                                            {% if producto.descripcion %}
-                                                {{ producto.descripcion }}
-                                            {% else %}
-                                                Producto higiénico
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-xl font-bold text-clean-green">${{ "%.2f"|format(producto.precio or 0) }}</div>
-                                <div class="text-sm text-gray-500">ARS</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    {% set stock_value = producto.stock or 0 %}
-                                    {% if stock_value > 10 %}
-                                    <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                        {{ stock_value }} unidades
-                                    </div>
-                                    {% elif stock_value > 0 %}
-                                    <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                                        {{ stock_value }} unidades
-                                    </div>
-                                    {% else %}
-                                    <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
-                                        Sin stock
-                                    </div>
-                                    {% endif %}
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                {% if stock_value > 10 %}
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                                    Disponible
-                                </span>
-                                {% elif stock_value > 0 %}
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                                    <span class="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
-                                    Poco Stock
-                                </span>
-                                {% else %}
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                    <span class="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
-                                    Agotado
-                                </span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        {% else %}
-                        <tr>
-                            <td colspan="5" class="px-6 py-8 text-center text-gray-500">
-                                <div class="flex flex-col items-center">
-                                    <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1h-4"></path>
-                                    </svg>
-                                    <p class="text-lg font-medium">No hay productos disponibles</p>
-                                    <p class="text-sm">Agrega productos al catálogo para verlos aquí</p>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
+            {% endfor %}
         </div>
 
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
-            <button class="bg-clean-blue hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-colors duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                </svg>
-                Agregar Producto
-            </button>
-            <button class="bg-clean-green hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-colors duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z"/>
-                </svg>
-                Generar Reporte
-            </button>
-            <button class="bg-purple-500 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-colors duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-                Actualizar Stock
-            </button>
+        {% if not productos %}
+        <div class="text-center py-12">
+            <p class="text-gray-500 text-lg">No hay productos disponibles en este momento.</p>
         </div>
+        {% endif %}
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex items-center justify-center mb-4">
-                <div class="bg-clean-blue rounded-lg p-2 mr-3">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
-                    </svg>
-                </div>
-                <span class="text-xl font-bold">CleanSA</span>
-            </div>
-            <p class="text-gray-400">© 2024 CleanSA - Productos Higiénicos. Sistema de Gestión de Inventario.</p>
-        </div>
-    </footer>
-
-
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
