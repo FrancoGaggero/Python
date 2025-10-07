@@ -32,6 +32,28 @@ document.addEventListener('DOMContentLoaded', function() {
             duration: 1000,
             easing: 'easeOutQuart'
         })
+
+        ///efecto para los items de servicios al pasar el mouse
+        const items = document.querySelectorAll('.item');
+        items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                anime({
+                    targets: item,
+                    scale: 1.1,
+                    duration: 300,
+                    easing: 'easeOutQuart'
+                });
+            });
+            item.addEventListener('mouseleave', () => {
+                anime({
+                    targets: item,
+                    scale: 1.0,
+                    duration: 300,
+                    easing: 'easeOutQuart'
+                });
+            });
+        });
+        
     
     
     
@@ -49,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
 });
+
+
+
 
 
 

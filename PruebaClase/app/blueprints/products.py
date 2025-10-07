@@ -4,38 +4,48 @@ Gestión del catálogo de productos higiénicos
 """
 
 from flask import Blueprint, render_template
-from ..database import get_all_products, get_product_by_id
 
 # ===================================
 # BLUEPRINT DE PRODUCTOS
 # ===================================
 
-products_bp = Blueprint('products', __name__, url_prefix='/admin/products')
+products_bp = Blueprint('products', __name__, url_prefix='/products')
 
 # ===================================
-# RUTAS DE PRODUCTOS
+# DATOS DE EJEMPLO TEMPORALES
+# ===================================
+
+# Lista simple de productos para empezar
+PRODUCTOS_EJEMPLO = [
+    {
+        'id': 1,
+        'nombre': 'Lavandina Concentrada',
+        'descripcion': 'Lavandina para limpieza profunda',
+        'precio': 1200.50,
+        'stock': 150
+    },
+    {
+        'id': 2,
+        'nombre': 'Detergente Líquido Premium', 
+        'descripcion': 'Detergente para ropa delicada',
+        'precio': 850.75,
+        'stock': 200
+    },
+    {
+        'id': 3,
+        'nombre': 'Jabón Antibacterial',
+        'descripcion': 'Jabón líquido antibacterial',
+        'precio': 420.00,
+        'stock': 300
+    }
+]
+
+# ===================================
+# RUTAS SIMPLES
 # ===================================
 
 @products_bp.route('/')
 def list_products():
-    """Listar todos los productos del catálogo CleanSA"""
-    productos = get_all_products() or []
-    return render_template('productos.html', productos=productos)
-
-@products_bp.route('/add')
-def add_product():
-    """Formulario para agregar nuevo producto"""
-    # TODO: Implementar formulario de creación
-    return "Formulario para agregar producto (por implementar)"
-
-@products_bp.route('/<int:product_id>')
-def view_product(product_id):
-    """Ver detalles de un producto específico"""
-    # TODO: Implementar vista de producto individual
-    return f"Detalles del producto {product_id} (por implementar)"
-
-@products_bp.route('/<int:product_id>/edit')
-def edit_product(product_id):
-    """Formulario para editar producto existente"""
-    # TODO: Implementar formulario de edición
-    return f"Editar producto {product_id} (por implementar)"
+    """Mostrar productos - versión simple"""
+    print(f"Mostrando {len(PRODUCTOS_EJEMPLO)} productos")
+    return render_template('productos_simple.html', productos=PRODUCTOS_EJEMPLO)

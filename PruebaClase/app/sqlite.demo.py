@@ -10,7 +10,7 @@ import sqlite3
 # CONFIGURACIÓN DE BASE DE DATOS
 # ===================================
 
-print("🏢 Inicializando base de datos CleanSA...")
+
 
 # Conexión a la base de datos (o creación si no existe)
 conn = sqlite3.connect('cleansa.db')
@@ -20,7 +20,7 @@ cursor = conn.cursor()
 # TABLAS DE CATÁLOGO - GESTIÓN DE PRODUCTOS
 # ===================================
 
-print("🧴 Creando tabla de productos...")
+ 
 
 # Tabla: PRODUCTOS - Catálogo de productos CleanSA
 cursor.execute('''
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS productos (
 # DATOS INICIALES - PRODUCTOS DE MUESTRA
 # ===================================
 
-print("📦 Insertando productos de ejemplo...")
+ 
 
 # Lista de productos iniciales para CleanSA
 productos = [
@@ -58,15 +58,50 @@ cursor.executemany('''
 ''', [(prod["nombre"], prod["precio"], prod["stock"]) for prod in productos])
 
 conn.commit()
-print("✅ Productos insertados correctamente")
 
+
+
+
+# ===================================
+# TABLAS DE CONFIGURACIÓN - TIPOS Y CATEGORÍAS
+# ===================================
+
+
+
+# Tabla: TIPOS DE USUARIO - Roles del sistema (Admin, Cliente)
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS tipos_usuario (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL
+)
+''')
+
+# ===================================
+# DATOS INICIALES - TIPOS DE USUARIO
+# ===================================
+
+
+
+# Definir roles del sistema CleanSA
+tipos_usuario = [
+    {"nombre": "admin"},
+    {"nombre": "cliente"}
+]
+
+# Insertar tipos de usuario
+cursor.executemany('''
+    INSERT OR IGNORE INTO tipos_usuario (nombre) 
+    VALUES (?)
+''', [(tipo["nombre"],) for tipo in tipos_usuario])
+
+conn.commit()
 
 
 # ===================================
 # TABLAS DE USUARIOS Y CLIENTES
 # ===================================
 
-print("👤 Creando tablas de usuarios...")
+
 
 # Tabla: USUARIOS - Clientes y usuarios del sistema
 cursor.execute('''
@@ -75,47 +110,30 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nombre TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     contrasena TEXT NOT NULL,
-    fecha_registro DATE DEFAULT CURRENT_DATE,
-    activo BOOLEAN DEFAULT 1
+    tipo_usuario_id INTEGER,
+    FOREIGN KEY (tipo_usuario_id) REFERENCES tipos_usuario(id)
 )
 ''')
 
-# ===================================
-# TABLAS DE CONFIGURACIÓN - TIPOS Y CATEGORÍAS
-# ===================================
-
-print("⚙️ Creando tablas de configuración...")
-
-# Tabla: TIPOS DE USUARIO - Roles del sistema (Admin, Cliente, Empleado)
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS tipos_usuario (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    descripcion TEXT,
-    permisos TEXT
-)
-''')
-
-# ===================================
-# DATOS INICIALES - TIPOS DE USUARIO
-# ===================================
-
-print("🔐 Insertando tipos de usuario...")
-
-# Definir roles del sistema CleanSA
-tipos_usuario = [
-    {"nombre": "admin", "descripcion": "Administrador del sistema", "permisos": "all"},
-    {"nombre": "cliente", "descripcion": "Cliente/Comprador", "permisos": "read"}
+usuarios = [
+    {"nombre": "Franco", "email": "franco@.com", "contrasena": "franco", "tipo_usuario_id": 1},
+    {"nombre": "Abril", "email": "abril@.com", "contrasena": "abril", "tipo_usuario_id": 2}
 ]
 
-# Insertar tipos de usuario
+# Insertar usuarios
 cursor.executemany('''
-    INSERT OR IGNORE INTO tipos_usuario (nombre, descripcion, permisos) 
-    VALUES (?, ?, ?)
-''', [(tipo["nombre"], tipo["descripcion"], tipo["permisos"]) for tipo in tipos_usuario])
+    INSERT OR IGNORE INTO usuarios (nombre, email, contrasena, tipo_usuario_id) 
+    VALUES (?, ?, ?, ?)
+''', [(user["nombre"], user["email"], user["contrasena"], user["tipo_usuario_id"]) for user in usuarios])
 
 conn.commit()
-print("✅ Tipos de usuario configurados")
+
+
+# ===================================
+# TABLAS DE CATÁLOGO - CATEGORÍAS DE PRODUCTOS
+# ===================================
+
+
 
 # Tabla: CATEGORÍAS DE PRODUCTOS - Clasificación de productos
 cursor.execute('''
@@ -131,7 +149,7 @@ CREATE TABLE IF NOT EXISTS categorias_producto (
 # DATOS INICIALES - CATEGORÍAS DE PRODUCTOS
 # ===================================
 
-print("📂 Insertando categorías de productos...")
+
 
 # Categorías específicas para productos de limpieza CleanSA
 categorias_productos = [
@@ -149,7 +167,7 @@ cursor.executemany('''
 ''', [(cat["nombre"], cat["descripcion"]) for cat in categorias_productos])
 
 conn.commit()
-print("✅ Categorías de productos configuradas")
+
 
 # ===================================
 # FINALIZACIÓN Y CONFIRMACIÓN
@@ -157,16 +175,6 @@ print("✅ Categorías de productos configuradas")
 
 # Confirmar todos los cambios
 conn.commit()
-
-print("\n" + "="*50)
-print("✅ Base de datos CleanSA inicializada correctamente!")
-print("📋 Tablas creadas:")
-print("   • usuarios - Clientes y usuarios del sistema") 
-print("   • productos - Catálogo de productos")
-print("   • categorias_producto - Clasificación de productos")
-print("   • tipos_usuario - Roles del sistema")
-print("🎉 ¡Sistema listo para usar!")
-print("="*50)
-
+ 
 # Cerrar conexión a la base de datos
 conn.close()

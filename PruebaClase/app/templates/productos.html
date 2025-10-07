@@ -39,7 +39,11 @@
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="bg-clean-green text-white px-4 py-2 rounded-lg text-sm font-medium">
-                        {{ productos|length }} Productos
+                        {% if productos %}
+                            {{ productos|length }} Productos
+                        {% else %}
+                            0 Productos
+                        {% endif %}
                     </div>
                 <a href="{{ url_for('main.home') }}" 
                    class="bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-md">
@@ -73,7 +77,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold text-gray-800">{{ productos|length }}</p>
+                        <p class="text-2xl font-bold text-gray-800">{{ (productos|length) if productos else 0 }}</p>
                         <p class="text-clean-gray text-sm">Total Productos</p>
                     </div>
                 </div>
@@ -176,41 +180,120 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        {% for producto in productos %}
-                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="bg-clean-blue text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
-                                        {{ producto[0] }}
+                        {% if productos and productos|length > 0 %}
+                            {% for producto in productos %}
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <!-- ID -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="bg-clean-blue text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                                            {{ producto.id }}
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <!-- Nombre y Descripción -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="bg-gradient-to-r from-clean-light to-blue-100 rounded-lg p-2 mr-3">
+                                            <svg class="w-6 h-6 text-clean-blue" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-lg font-semibold text-gray-900">{{ producto.nombre }}</div>
+                                            <div class="text-sm text-clean-gray">{{ producto.descripcion }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <!-- Precio -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-xl font-bold text-clean-green">${{ "%.2f"|format(producto.precio) }}</div>
+                                    <div class="text-sm text-gray-500">ARS</div>
+                                </td>
+                                
+                                <!-- Stock -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        {% if producto.stock > 10 %}
+                                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                            {{ producto.stock }} unidades
+                                        </div>
+                                        {% elif producto.stock > 0 %}
+                                        <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                                            {{ producto.stock }} unidades
+                                        </div>
+                                        {% else %}
+                                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                                            Sin stock
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                
+                                <!-- Estado -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {% if producto.stock > 10 %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                                        Disponible
+                                    </span>
+                                    {% elif producto.stock > 0 %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
+                                        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
+                                        Poco Stock
+                                    </span>
+                                    {% else %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                        <span class="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                                        Sin Stock
+                                    </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <!-- Mensaje cuando no hay productos -->
+                            <tr>
+                                <td colspan="5" class="px-6 py-12 text-center">
+                                    <div class="flex flex-col items-center">
+                                        <div class="bg-gray-100 rounded-full p-4 mb-4">
+                                            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay productos disponibles</h3>
+                                        <p class="text-gray-500">El catálogo está vacío en este momento.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                                        <div class="text-lg font-semibold text-gray-900">{{ producto.nombre }}</div>
+                                        <div class="text-sm text-clean-gray">
+                                            {% if producto.descripcion %}
+                                                {{ producto.descripcion }}
+                                            {% else %}
+                                                Producto higiénico
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="bg-gradient-to-r from-clean-light to-blue-100 rounded-lg p-2 mr-3">
-                                        <svg class="w-6 h-6 text-clean-blue" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div class="text-lg font-semibold text-gray-900">{{ producto[1] }}</div>
-                                        <div class="text-sm text-clean-gray">Producto higiénico</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-xl font-bold text-clean-green">${{ "%.2f"|format(producto[2]) }}</div>
-                                <div class="text-sm text-gray-500">USD</div>
+                                <div class="text-xl font-bold text-clean-green">${{ "%.2f"|format(producto.precio or 0) }}</div>
+                                <div class="text-sm text-gray-500">ARS</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    {% if producto[3] > 10 %}
+                                    {% set stock_value = producto.stock or 0 %}
+                                    {% if stock_value > 10 %}
                                     <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                        {{ producto[3] }} unidades
+                                        {{ stock_value }} unidades
                                     </div>
-                                    {% elif producto[3] > 0 %}
+                                    {% elif stock_value > 0 %}
                                     <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                                        {{ producto[3] }} unidades
+                                        {{ stock_value }} unidades
                                     </div>
                                     {% else %}
                                     <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -220,12 +303,12 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                {% if producto[3] > 10 %}
+                                {% if stock_value > 10 %}
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
                                     <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
                                     Disponible
                                 </span>
-                                {% elif producto[3] > 0 %}
+                                {% elif stock_value > 0 %}
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
                                     <span class="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
                                     Poco Stock
@@ -239,6 +322,19 @@
                             </td>
                         </tr>
                         {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                <div class="flex flex-col items-center">
+                                    <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1h-4"></path>
+                                    </svg>
+                                    <p class="text-lg font-medium">No hay productos disponibles</p>
+                                    <p class="text-sm">Agrega productos al catálogo para verlos aquí</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>
