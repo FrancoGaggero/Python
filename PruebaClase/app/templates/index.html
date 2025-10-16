@@ -60,54 +60,68 @@
         </div>
 
         <!-- Navigation Cards -->
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="flex flex-col lg:flex-row gap-8 mb-16 justify-center items-stretch">
             
             <!-- About Card -->
-            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-pro-blue">
-                <div class="bg-pro-blue p-6 text-smoke-white">
-                    <div class="flex items-center justify-center mb-4">
-                        <div class="bg-smoke-white bg-opacity-20 rounded-full p-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
+            <div class="nav-card bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 overflow-hidden border-2 border-pro-blue group max-w-md lg:max-w-sm xl:max-w-md">
+                <div class="bg-gradient-to-br from-pro-blue to-dark-teal p-8 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="bg-white bg-opacity-20 rounded-full p-5 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                                </svg>
+                            </div>
                         </div>
+                        <h3 class="text-3xl font-bold text-center mb-2">Acerca de CleanSA</h3>
+                        <p class="text-center opacity-90 text-lg">Nuestra empresa</p>
                     </div>
-                    <h3 class="text-2xl font-bold text-center">Acerca de</h3>
-                    <p class="text-center mt-2 opacity-90">Información de la empresa</p>
                 </div>
-                <div class="p-6 bg-smoke-white">
-                    <p class="text-pro-blue mb-6 text-center">
-                        Conoce más sobre CleanSA, nuestra historia, misión y valores empresariales.
+                <div class="p-8 bg-gradient-to-b from-white to-smoke-white">
+                    <p class="text-pro-blue mb-8 text-center leading-relaxed text-lg">
+                        Descubre la historia, misión y valores que hacen de CleanSA una empresa líder en el sector de productos higiénicos.
                     </p>
                     <a href="{{ url_for('main.about') }}" 
-                       class="block w-full bg-pro-blue hover:bg-dark-teal text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300">
-                        Ver Información
+                       class="block w-full bg-gradient-to-r from-pro-blue to-dark-teal hover:from-dark-teal hover:to-pro-blue text-white text-center py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                            Ver Información
+                        </span>
                     </a>
                 </div>
             </div>
 
-
-            <!---Productos card-->
-
-            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-soft-gray">
-                <div class="bg-soft-gray p-6 text-smoke-white">
-                    <div class="flex items-center justify-center mb-4">
-                        <div class="bg-smoke-white bg-opacity-20 rounded-full p-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                            </svg>
+            <!-- Productos Card -->
+            <div class="nav-card bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 overflow-hidden border-2 border-warm-green group max-w-md lg:max-w-sm xl:max-w-md">
+                <div class="bg-gradient-to-br from-warm-green to-light-teal p-8 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="bg-white bg-opacity-20 rounded-full p-5 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M7 4V2C7 1.45 7.45 1 8 1h8c.55 0 1 .45 1 1v2h4c.55 0 1 .45 1 1s-.45 1-1 1h-1v11c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6H3c-.55 0-1-.45-1-1s.45-1 1-1h4zM9 3v1h6V3H9zm8 3H7v10h10V6zm-7 2v6c0 .55.45 1 1 1s1-.45 1-1V8c0-.55-.45-1-1-1s-1 .45-1 1zm4 0v6c0 .55.45 1 1 1s1-.45 1-1V8c0-.55-.45-1-1-1s-1 .45-1 1z"/>
+                                </svg>
+                            </div>
                         </div>
+                        <h3 class="text-3xl font-bold text-center mb-2">Catálogo de Productos</h3>
+                        <p class="text-center opacity-90 text-lg">Gestión integral</p>
                     </div>
-                    <h3 class="text-2xl font-bold text-center">Catálogo</h3>
-                    <p class="text-center mt-2 opacity-90">Gestión de productos</p>
                 </div>
-                <div class="p-6 bg-smoke-white">
-                    <p class="text-soft-gray mb-6 text-center">
-                        Administra la información de los productos de CleanSA.
+                <div class="p-8 bg-gradient-to-b from-white to-smoke-white">
+                    <p class="text-warm-green mb-8 text-center leading-relaxed text-lg">
+                        Explora y administra nuestro amplio catálogo de productos de limpieza e higiene de alta calidad.
                     </p>
                     <a href="{{ url_for('products.list_products') }}" 
-                       class="block w-full bg-soft-gray hover:bg-pro-blue text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300">
-                        Ver Productos
+                       class="block w-full bg-gradient-to-r from-warm-green to-light-teal hover:from-light-teal hover:to-warm-green text-white text-center py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                            Ver Productos
+                        </span>
                     </a>
                 </div>
             </div>
@@ -174,20 +188,8 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-soft-gray text-smoke-white py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex items-center justify-center mb-4">
-                <div class="bg-pro-blue rounded-lg p-2 mr-3">
-                    <svg class="w-6 h-6 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
-                    </svg>
-                </div>
-                <span class="text-xl font-bold">CleanSA</span>
-            </div>
-            <p class="text-smoke-white opacity-80">© 2024 CleanSA - Productos Higiénicos. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+  <!-- Footer -->
+   {% include 'components/footer.html' %}
 
 
     <!-- Librerías externas -->
