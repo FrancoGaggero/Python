@@ -1,7 +1,9 @@
 # Clean S.A
 
-<p PLataforma de gestion de ventas y clietes</p>
-<h2 Stack tecnologico </h2>
+<p> PLataforma de gestion de ventas y clietes</p>
+<h2>
+  Stack tecnologico 
+</h2>
 
   <ul>
     <li>Python</li>
