@@ -1,17 +1,17 @@
-# Mi Proyecto
+# Clean S.A
 
-Este es un ejemplo de cómo usar HTML dentro del README.
+<p PLataforma de gestion de ventas y clietes</p>
+<h2 Stack tecnologico </h2>
 
-<p style="color:blue;">Este texto es azul usando HTML (pero el estilo inline puede no funcionar en GitHub)</p>
+<ul 
+  <li Python </li>
+  <li JavaScript </li>
+  <li SQLAlchemy </li>
 
+</ul>
+  
 <br>
 
-Puedes insertar imágenes con HTML:
+Proyecto Final para:
 
-
-
-<br>
-
-Y enlaces con HTML:
-
-<a href="https://github.com">Visita GitHub</a>
+<a href="https://davinci.edu.ar/">Visita GitHub</a>
