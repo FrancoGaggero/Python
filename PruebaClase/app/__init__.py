@@ -1,3 +1,4 @@
+
 """
 CleanSA - Aplicación Flask Principal
 Sistema de gestión para empresa de productos higiénicos
@@ -15,12 +16,11 @@ def create_app():
     app = Flask(__name__)
     
     # ===================================
-    # CONFIGURACIÓN DE LA APLICACIÓN
+    # CONFIGURACIÓN BÁSICA
     # ===================================
     
-    # TODO: Mover a archivo de configuración
-    app.config['SECRET_KEY'] = 'cleansa-secret-key-change-in-production'
-    app.config['DATABASE'] = 'cleansa.db'
+    app.config['SECRET_KEY'] = 'cleansa-secret-key-development'
+    
     
     # ===================================
     # REGISTRO DE BLUEPRINTS

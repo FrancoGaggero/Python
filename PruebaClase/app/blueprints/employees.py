@@ -23,20 +23,19 @@ def list_employees():
     empleados = []  # Temporal hasta implementar database
     return render_template('empleados.html', empleados=empleados)
 
-@employees_bp.route('/add')
-def add_employee():
-    """Formulario para agregar nuevo empleado"""
-    # TODO: Implementar formulario de creación
-    return "Formulario para agregar empleado (por implementar)"
 
-@employees_bp.route('/<int:employee_id>')
-def view_employee(employee_id):
-    """Ver detalles de un empleado específico"""
-    # TODO: Implementar vista de empleado individual
-    return f"Detalles del empleado {employee_id} (por implementar)"
+#agregar las rutas necesarias para gestionar empleados
 
-@employees_bp.route('/<int:employee_id>/edit')
-def edit_employee(employee_id):
-    """Formulario para editar empleado existente"""
-    # TODO: Implementar formulario de edición
-    return f"Editar empleado {employee_id} (por implementar)"
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,28 +10,26 @@
             theme: {
                 extend: {
                     colors: {
-                        'clean-blue': '#0077BE',
-                        'clean-green': '#00C851',
-                        'clean-light': '#F5F8FA',
-                        'clean-gray': '#6C757D'
+                        'smoke-white': '#F9FAFB',        // Blanco humo (fondo general)
+                        'pro-blue': '#2563EB',           // Azul profesional (elementos principales)
+                        'light-blue': '#60A5FA',         // Azul claro (suavizar elementos)
+                        'soft-gray': '#94A3B8',          // Gris suave (equilibrio neutral)
+                        'warm-green': '#22C55E',         // Verde cálido (acentos positivos)
+                        'light-teal': '#06B6D4',         // Turquesa claro (variedad)
+                        'dark-teal': '#1E3A8A',          // Azul petróleo (solo acentos mínimos)
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-gradient-to-br from-clean-light to-blue-50 min-h-screen flex items-center justify-center">
+<body class="bg-smoke-white min-h-screen">
     
-    <!-- Botón volver al menú - Posición fija -->
-    <div class="absolute top-6 left-6">
-        <a href="{{ url_for('main.home') }}" 
-           class="flex items-center bg-white hover:bg-gray-50 text-clean-blue border border-clean-blue px-4 py-2 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Volver al Menú
-        </a>
-    </div>
+    <!-- Include Navigation Component -->
+    {% include 'components/nav.html' %}
+
+    <!-- Login Content -->
+    <div class="flex items-center justify-center min-h-screen py-8">
 
     <!-- Contenedor principal -->
     <div class="w-full max-w-md px-6">
@@ -39,14 +37,14 @@
         <!-- Logo y header -->
         <div class="text-center mb-8">
             <div class="flex items-center justify-center mb-4">
-                <div class="bg-clean-blue rounded-xl p-4 shadow-lg">
-                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div class="bg-pro-blue rounded-lg p-3 mr-4">
+                    <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
                     </svg>
                 </div>
             </div>
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">CleanSA</h1>
-            <p class="text-clean-gray">Iniciar Sesión en el Sistema</p>
+            <h1 class="text-3xl font-bold text-dark-teal mb-2">CleanSA</h1>
+            <p class="text-soft-gray">Iniciar Sesión en el Sistema</p>
         </div>
 
         <!-- Formulario de login -->
@@ -54,8 +52,8 @@
             
             <!-- Título del formulario -->
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">Bienvenido</h2>
-                <p class="text-clean-gray">Ingresa tus credenciales para continuar</p>
+                <h2 class="text-2xl font-bold text-dark-teal mb-2">Bienvenido</h2>
+                <p class="text-soft-gray">Ingresa tus credenciales para continuar</p>
             </div>
 
             <!-- Formulario -->
@@ -63,7 +61,7 @@
                 
                 <!-- Campo Usuario -->
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="username" class="block text-sm font-medium text-dark-teal mb-2">
                         <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                         </svg>
@@ -74,14 +72,14 @@
                         id="username" 
                         name="username" 
                         required
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-clean-blue focus:border-clean-blue transition-colors duration-200 bg-gray-50 focus:bg-white"
+                        class="w-full px-4 py-3 border border-soft-gray rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-smoke-white focus:bg-white transform hover:scale-105"
                         placeholder="Ingresa tu usuario"
                     >
                 </div>
 
                 <!-- Campo Contraseña -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="password" class="block text-sm font-medium text-dark-teal mb-2">
                         <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M6 10v2h12v-2a6 6 0 10-12 0zm6-8a8 8 0 018 8v2h1a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1v-8a1 1 0 011-1h1v-2a8 8 0 018-8z"/>
                         </svg>
@@ -92,7 +90,7 @@
                         id="password" 
                         name="password" 
                         required
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-clean-blue focus:border-clean-blue transition-colors duration-200 bg-gray-50 focus:bg-white"
+                        class="w-full px-4 py-3 border border-soft-gray rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-smoke-white focus:bg-white transform hover:scale-105"
                         placeholder="Ingresa tu contraseña"
                     >
                 </div>
@@ -104,13 +102,13 @@
                             type="checkbox" 
                             id="remember" 
                             name="remember"
-                            class="h-4 w-4 text-clean-blue focus:ring-clean-blue border-gray-300 rounded"
+                            class="h-4 w-4 text-pro-blue focus:ring-pro-blue border-soft-gray rounded"
                         >
-                        <label for="remember" class="ml-2 text-sm text-gray-600">
+                        <label for="remember" class="ml-2 text-sm text-soft-gray">
                             Recordar sesión
                         </label>
                     </div>
-                    <a href="#" class="text-sm text-clean-blue hover:underline">
+                    <a href="#" class="text-sm text-pro-blue hover:underline transition-colors duration-200">
                         ¿Olvidaste tu contraseña?
                     </a>
                 </div>
@@ -118,12 +116,12 @@
                 <!-- Botón de inicio de sesión -->
                 <button 
                     type="submit"
-                    class="w-full bg-clean-blue hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    class="w-full bg-pro-blue hover:bg-dark-teal text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013 3v1"></path>
                     </svg>
-                    Iniciar Sesión
+                    <span>Iniciar Sesión</span>
                 </button>
 
             </form>
@@ -131,8 +129,8 @@
             <!-- Separador -->
             <div class="mt-6 border-t border-gray-200 pt-6">
                 <div class="text-center">
-                    <p class="text-sm text-gray-600 mb-4">¿No tienes una cuenta?</p>
-                    <button class="w-full bg-clean-green hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                    <p class="text-sm text-soft-gray mb-4">¿No tienes una cuenta?</p>
+                    <button class="w-full bg-warm-green hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center transform hover:scale-105">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                         </svg>
@@ -145,7 +143,7 @@
 
         <!-- Información adicional -->
         <div class="text-center mt-6">
-            <p class="text-sm text-clean-gray">
+            <p class="text-sm text-soft-gray">
                 Sistema de gestión CleanSA v2.0
             </p>
             <p class="text-xs text-gray-500 mt-2">
@@ -157,10 +155,20 @@
 
     <!-- Elementos decorativos de fondo -->
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div class="absolute top-10 right-10 w-20 h-20 bg-clean-blue opacity-10 rounded-full"></div>
-        <div class="absolute bottom-10 left-10 w-32 h-32 bg-clean-green opacity-10 rounded-full"></div>
-        <div class="absolute top-1/2 left-20 w-16 h-16 bg-purple-400 opacity-10 rounded-full"></div>
+        <div class="absolute top-10 right-10 w-20 h-20 bg-pro-blue opacity-10 rounded-full"></div>
+        <div class="absolute bottom-10 left-10 w-32 h-32 bg-warm-green opacity-10 rounded-full"></div>
+        <div class="absolute top-1/2 left-20 w-16 h-16 bg-light-teal opacity-10 rounded-full"></div>
     </div>
 
+
+
+
+
+     <!-- Librerías externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Scripts principales de CleanSA -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>

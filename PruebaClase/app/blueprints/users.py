@@ -18,19 +18,19 @@ users_bp = Blueprint('users', __name__, url_prefix='/admin/users')
 # TODO: Migrar a base de datos cuando sea necesario
 NOMBRE_USUARIO = "Franco"
 ALUMNOS_EJEMPLO = [
-    {"nombre": "Juan", "edad": 20},
-    {"nombre": "Ana", "edad": 22},
-    {"nombre": "Luis", "edad": 19},
-    {"nombre": "Franco", "edad": 23}
+    {"nombre": "Franco", "edad": 20},
+    {"nombre": "Flor", "edad": 22},
+    {"nombre": "Gero", "edad": 19},
+    {"nombre": "Abril", "edad": 23}
 ]
-USUARIOS_EJEMPLO = ["Juan", "Ana", "Luis", "Franco"]
+USUARIOS_EJEMPLO = ["Franco", "Flor", "Gero", "Abril"]
 
 # ===================================
 # RUTAS DE USUARIOS
 # ===================================
 
 @users_bp.route('/')
-def list_users():
+def index():
     """Listar usuarios del sistema"""
     return render_template(
         'usuarios.html', 
@@ -46,7 +46,7 @@ def add_user():
         nombre_usuario = request.form.get('nombre_usuario')
         if nombre_usuario and nombre_usuario.strip():
             USUARIOS_EJEMPLO.append(nombre_usuario.strip())
-        return redirect(url_for('users.list_users'))
+        return redirect(url_for('users.index'))
     
     # TODO: Implementar formulario GET
     return "Formulario para agregar usuario (por implementar)"
@@ -62,3 +62,13 @@ def edit_user(user_id):
     """Formulario para editar usuario existente"""
     # TODO: Implementar formulario de edición
     return f"Editar usuario {user_id} (por implementar)"
+
+@users_bp.route('/panel')
+def panel():
+    """Panel administrativo de usuarios con funcionalidades CRUD"""
+    return render_template('panel_usuarios.html')
+
+@users_bp.route('/perfil')
+def perfil():
+    """Vista de perfil personal del usuario logueado"""
+    return render_template('perfil_usuarios.html')

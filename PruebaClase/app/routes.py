@@ -4,27 +4,11 @@ Rutas principales para la aplicación de productos higiénicos
 """
 
 from flask import Blueprint, render_template, request, redirect, url_for
-import sqlite3
 
 # ===================================
-# CONFIGURACIÓN DE BASE DE DATOS
+# DATOS DE EJEMPLO (SIN BASE DE DATOS)
 # ===================================
 
-def get_db_connection():
-    """
-    Establece conexión a la base de datos CleanSA
-    Returns:
-        sqlite3.Connection: Conexión a la base de datos
-    """
-    conn = sqlite3.connect('cleansa.db')
-    conn.row_factory = sqlite3.Row  # Acceder a las columnas por nombre
-    return conn
-
-# ===================================
-# DATOS DE EJEMPLO (TEMPORAL)
-# ===================================
-
-# TODO: Migrar a base de datos cuando sea necesario
 NOMBRE_USUARIO = "Franco"
 ALUMNOS_EJEMPLO = [
     {"nombre": "Juan", "edad": 20},
@@ -83,17 +67,14 @@ def add_user():
 @main.route('/empleados')
 def empleados():
     """Listar empleados de CleanSA"""
-    conn = get_db_connection()
-    try:
-        empleados = conn.execute('SELECT * FROM empleados').fetchall()
-    except sqlite3.Error as e:
-        # TODO: Implementar logging adecuado
-        print(f"Error al obtener empleados: {e}")
-        empleados = []
-    finally:
-        conn.close()
+    # Datos falsos de empleados para demo
+    empleados_falsos = [
+        {"id": 1, "nombre": "Ana García", "puesto": "Gerente de Ventas", "email": "ana@cleansa.com"},
+        {"id": 2, "nombre": "Carlos López", "puesto": "Técnico de Laboratorio", "email": "carlos@cleansa.com"},
+        {"id": 3, "nombre": "María Rodríguez", "puesto": "Coordinadora de Logística", "email": "maria@cleansa.com"}
+    ]
     
-    return render_template('empleados.html', empleados=empleados)
+    return render_template('empleados.html', empleados=empleados_falsos)
 
 # ===================================
 # GESTIÓN DE PRODUCTOS
@@ -102,17 +83,14 @@ def empleados():
 @main.route('/productos')
 def productos():
     """Listar productos del catálogo CleanSA"""
-    conn = get_db_connection()
-    try:
-        productos = conn.execute('SELECT * FROM productos').fetchall()
-    except sqlite3.Error as e:
-        # TODO: Implementar logging adecuado
-        print(f"Error al obtener productos: {e}")
-        productos = []
-    finally:
-        conn.close()
+    # Datos falsos de productos para demo
+    productos_falsos = [
+        {"id": 1, "nombre": "Detergente Premium", "precio": 850.00, "stock": 150},
+        {"id": 2, "nombre": "Lavandina Concentrada", "precio": 1200.50, "stock": 200},
+        {"id": 3, "nombre": "Jabón Antibacterial", "precio": 420.00, "stock": 300}
+    ]
     
-    return render_template('productos.html', productos=productos)
+    return render_template('productos.html', productos=productos_falsos)
 
 
 

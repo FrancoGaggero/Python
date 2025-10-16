@@ -17,10 +17,9 @@ admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin_bp.route('/')
 @admin_bp.route('/dashboard')
-def dashboard():
+def index():
     """Dashboard principal de administración"""
-    # TODO: Implementar dashboard con estadísticas
-    return "Dashboard de Administración (por implementar)"
+    return render_template('pandel_admin.html')
 
 @admin_bp.route('/stats')
 def stats():

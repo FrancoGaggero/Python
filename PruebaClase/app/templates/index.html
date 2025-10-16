@@ -43,29 +43,8 @@
 </head>
 <body class="bg-smoke-white min-h-screen" data-page="home">
     
-    <!-- Header -->
-    <header class="bg-smoke-white shadow-lg border-b-2 border-pro-blue">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div id="main-title" class="flex items-center">
-                    <div class="bg-pro-blue rounded-lg p-2 mr-4">
-                        <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <div class="text-lg">
-                        <h1 class="text-3xl font-bold text-dark-teal">CleanSA</h1>
-                        <p class="text-pro-blue text-sm">Productos Higiénicos de Calidad</p>
-                    </div>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                  
-                    <a href="{{ url_for('auth.index') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">Iniciar Sesión</a>
-                    <div class="w-2 h-2 bg-pro-blue rounded-full"></div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- Include Navigation Component -->
+    {% include 'components/nav.html' %}
 
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-12 max-w-6xl page-content">
@@ -107,53 +86,7 @@
                 </div>
             </div>
 
-            <!-- Usuarios/Alumnos Card -->
-            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-light-teal">
-                <div class="bg-light-teal p-6 text-smoke-white">
-                    <div class="flex items-center justify-center mb-4">
-                        <div class="bg-smoke-white rounded-full p-4 shadow-md">
-                            <svg class="w-8 h-8 text-light-teal" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.996 2.996 0 0 0 17.05 7H16c-.8 0-1.54.31-2.1.83l-3.88 3.88C9.43 12.3 9 13.1 9 14v6h2v-6c0-.55.45-1 1-1h1v7h7zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6C4.67 6 4 6.67 4 7.5S4.67 9 5.5 9 7 8.33 7 7.5 6.33 6 5.5 6zm.5 9.5c0-.83-.67-1.5-1.5-1.5S3 14.67 3 15.5 3.67 17 4.5 17 6 16.33 6 15.5zm0 0V18c0 1.1.9 2 2 2h3v-2H8v-2.5z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-center">Usuarios</h3>
-                    <p class="text-center mt-2">Gestión de usuarios</p>
-                </div>
-                <div class="p-6 bg-smoke-white">
-                    <p class="text-light-teal mb-6 text-center">
-                        Administra los usuarios del sistema, clientes y personal autorizado.
-                    </p>
-                    <a href="{{ url_for('users.list_users') }}" 
-                       class="block w-full bg-light-teal hover:bg-pro-blue text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300 border">
-                        Gestionar Usuarios
-                    </a>
-                </div>
-            </div>
 
-            <!-- Empleados Card -->
-            <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-warm-green">
-                <div class="bg-warm-green p-6 text-smoke-white">
-                    <div class="flex items-center justify-center mb-4">
-                        <div class="bg-smoke-white bg-opacity-20 rounded-full p-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-center">Empleados</h3>
-                    <p class="text-center mt-2 opacity-90">Gestión de personal</p>
-                </div>
-                <div class="p-6 bg-smoke-white">
-                    <p class="text-warm-green mb-6 text-center">
-                        Administra la información del personal de CleanSA y sus departamentos.
-                    </p>
-                    <a href="{{ url_for('employees.list_employees') }}" 
-                       class="block w-full bg-warm-green hover:bg-light-teal text-smoke-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300">
-                        Ver Empleados
-                    </a>
-                </div>
-            </div>
             <!---Productos card-->
 
             <div class="nav-card bg-smoke-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-soft-gray">

@@ -1,17 +1,88 @@
 <!---COMPONENETE DEL NAV---->
 
-
 <div class="nav-container">
-  <nav class="nav">
-    <div class="logo">
-      <a href="/">MyApp</a>
-    </div>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/services">Services</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- Header -->
+    <header class="bg-smoke-white shadow-lg border-b-2 border-pro-blue">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div id="main-title" class="flex items-center">
+                    <div class="bg-pro-blue rounded-lg p-2 mr-4">
+                        <svg class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <div class="text-lg">
+                        <h1 class="text-3xl font-bold text-dark-teal">
+                            <a href="{{ url_for('main.home') }}" class="hover:text-pro-blue transition-colors">CleanSA</a>
+                        </h1>
+                        <p class="text-pro-blue text-sm">Productos Higiénicos de Calidad</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="{{ url_for('main.home') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                        Inicio
+                    </a>
+                    <a href="{{ url_for('products.list_products') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                        Productos
+                    </a>
+                    <a href="{{ url_for('users.perfil') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                        Mi Perfil
+                    </a>
+                    <div class="w-2 h-2 bg-soft-gray rounded-full"></div>
+                    <a href="{{ url_for('admin.index') }}" class="bg-warm-green text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium">
+                        Panel Admin
+                    </a>
+                    <a href="{{ url_for('auth.login') }}" class="bg-pro-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        Login
+                    </a>
+                </nav>
 
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-pro-blue hover:text-dark-teal">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 border-t border-soft-gray pt-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="{{ url_for('main.home') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium py-2">
+                        Inicio
+                    </a>
+                    <a href="{{ url_for('products.list_products') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium py-2">
+                        Productos
+                    </a>
+                    <a href="{{ url_for('users.perfil') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium py-2">
+                        Mi Perfil
+                    </a>
+                    <a href="{{ url_for('admin.index') }}" class="bg-warm-green text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium text-center">
+                        Panel Admin
+                    </a>
+                    <a href="{{ url_for('auth.login') }}" class="bg-pro-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center">
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 </div>
