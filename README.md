@@ -1,18 +1,14 @@
 # Clean S.A
 
-<p> PLataforma de gestion de ventas y clietes</p>
-<h2>
-  Stack tecnologico 
-</h2>
+Plataforma de gestión de ventas y clientes.
 
-  <ul>
-    <li>Python</li>
-    <li>JavaScript</li>
-    <li>SQLAlchemy</li>
-  </ul>
-  
-<br>
+## Stack tecnológico
 
-Proyecto Final para:
+- Python
+- JavaScript
+- SQLAlchemy
 
-<a href="https://davinci.edu.ar/">Da Vinci</a>
+---
+
+Proyecto final para:  
+[Da Vinci](https://davinci.edu.ar/)
