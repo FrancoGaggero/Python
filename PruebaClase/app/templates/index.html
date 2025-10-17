@@ -39,6 +39,13 @@
             opacity: 0;
             transform: translateY(30px);
         }
+        #first {
+            display: inline-block;
+        }
+        #first span {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-smoke-white min-h-screen" data-page="home">
@@ -50,9 +57,9 @@
     <main class="container mx-auto px-6 py-12 max-w-6xl page-content">
         
         <!-- Hero Section -->
-        <div id="hero-section" class="bg-smoke-white rounded-2xl shadow-lg p-8 text-center mb-16 fade-in border border-pro-blue">
+        <div class="nav-card rounded-2xl shadow-lg p-8 text-center mb-16 fade-in border border-pro-blue">
             <h2 class="text-4xl md:text-5xl font-bold text-dark-teal mb-4">
-                Bienvenido a <span class="text-pro-blue">CleanSA</span>
+                Bienvenido a <span id="first" class="text-pro-blue">CleanSA</span>
             </h2>
             <p class="text-xl text-pro-blue mb-8 max-w-3xl mx-auto">
                 Tu empresa líder en productos higiénicos de alta calidad. Accede a nuestro sistema de gestión integral.
