@@ -3,123 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acerca de Nosotros</title>
+    <title>CleanSA - Acerca de Nosotros</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'smoke-white': '#F9FAFB',
+                        'pro-blue': '#2563EB',
+                        'light-blue': '#60A5FA',
+                        'soft-gray': '#94A3B8',
+                        'warm-green': '#22C55E',
+                        'light-teal': '#06B6D4',
+                        'dark-teal': '#1E3A8A',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-bold">Mi Proyecto Flask</h1>
-                <a href="{{ url_for('main.home') }}" 
-                   class="bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-md">
-                    ← Volver al Inicio
-                </a>
-            </div>
-        </div>
-    </header>
+<body class="bg-smoke-white min-h-screen">
+
+    <!-- Include Navigation Component -->
+    {% include 'components/nav.html' %}
 
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-6 py-12 max-w-7xl">
+        
         <!-- Hero Section -->
-        <div class="text-center mb-16">
-            <h2 class="text-5xl font-bold text-gray-800 mb-6">Acerca de Este Proyecto</h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Un proyecto educativo desarrollado con Flask y Python, utilizando Blueprints para una 
-                arquitectura modular y escalable.
+        <div  class="text-center mb-16">
+            <div class="flex items-center justify-center mb-8">
+                <div id="logo" class="bg-gradient-to-br from-pro-blue to-light-teal rounded-2xl p-6 shadow-xl">
+                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-dark-teal mb-6">
+                Conoce <span class="text-pro-blue">CleanSA</span>
+            </h1>
+            <p class="text-xl text-soft-gray max-w-4xl mx-auto leading-relaxed">
+                Líderes en productos higiénicos de alta calidad desde 2010. Comprometidos con la limpieza, 
+                la salud y el cuidado del medio ambiente.
             </p>
         </div>
 
-        <!-- Features Grid -->
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
-            <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition duration-300">
-                <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Flask & Python</h3>
-                <p class="text-gray-600">Desarrollo backend robusto utilizando el framework Flask de Python para crear aplicaciones web dinámicas.</p>
+        <!-- Company Stats -->
+        <div class="grid md:grid-cols-4 gap-6 mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-6 text-center border border-pro-blue hover:shadow-2xl transition-all duration-300">
+                <div class="text-3xl font-bold text-pro-blue mb-2">14+</div>
+                <div class="text-soft-gray">Años de Experiencia</div>
             </div>
-
-            <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition duration-300">
-                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Blueprints</h3>
-                <p class="text-gray-600">Arquitectura modular usando Flask Blueprints para organizar y estructurar mejor el código de la aplicación.</p>
+            <div class="bg-white rounded-2xl shadow-xl p-6 text-center border border-warm-green hover:shadow-2xl transition-all duration-300">
+                <div class="text-3xl font-bold text-warm-green mb-2">500+</div>
+                <div class="text-soft-gray">Productos Desarrollados</div>
             </div>
-
-            <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition duration-300">
-                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Tailwind CSS</h3>
-                <p class="text-gray-600">Diseño moderno y responsivo utilizando Tailwind CSS para crear interfaces atractivas y funcionales.</p>
+            <div class="bg-white rounded-2xl shadow-xl p-6 text-center border border-light-teal hover:shadow-2xl transition-all duration-300">
+                <div class="text-3xl font-bold text-light-teal mb-2">10,000+</div>
+                <div class="text-soft-gray">Clientes Satisfechos</div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-xl p-6 text-center border border-soft-gray hover:shadow-2xl transition-all duration-300">
+                <div class="text-3xl font-bold text-soft-gray mb-2">100%</div>
+                <div class="text-soft-gray">Eco-Friendly</div>
             </div>
         </div>
 
-        <!-- About Section -->
-        <div class="bg-white rounded-xl shadow-lg p-12 mb-16">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Our Story Section -->
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden mb-16 border border-gray-100">
+            <div class="grid lg:grid-cols-2">
+                <div class="p-8 lg:p-12">
+                    <h2 class="text-4xl font-bold text-dark-teal mb-6">Nuestra Historia</h2>
+                    <div class="space-y-4 text-soft-gray leading-relaxed">
+                        <p>
+                            <strong class="text-dark-teal">CleanSA nació en 2010</strong> con una visión clara: revolucionar 
+                            la industria de productos higiénicos en América Latina, ofreciendo soluciones innovadoras 
+                            que combinan eficacia, calidad y respeto por el medio ambiente.
+                        </p>
+                        <p>
+                            Comenzamos como una pequeña empresa familiar en Santiago, Chile, con apenas 5 empleados 
+                            y un sueño grande. Hoy somos una empresa consolidada que exporta a más de 12 países 
+                            y emplea a más de 200 personas.
+                        </p>
+                        <p>
+                            Nuestro compromiso con la <strong class="text-warm-green">sostenibilidad</strong> y la 
+                            <strong class="text-pro-blue">innovación</strong> nos ha posicionado como líderes del 
+                            sector, siendo pioneros en el desarrollo de productos biodegradables y envases reciclables.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-pro-blue via-light-blue to-light-teal p-8 lg:p-12 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <div class="mb-8">
+                            <svg class="w-24 h-24 mx-auto mb-4 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Certificaciones de Calidad</h3>
+                        <div class="space-y-2">
+                            <div class="bg-white bg-opacity-20 rounded-lg py-2 px-4">ISO 9001:2015</div>
+                            <div class="bg-white bg-opacity-20 rounded-lg py-2 px-4">ISO 14001:2015</div>
+                            <div class="bg-white bg-opacity-20 rounded-lg py-2 px-4">OHSAS 18001</div>
+                            <div class="bg-white bg-opacity-20 rounded-lg py-2 px-4">Certificación Orgánica</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission, Vision, Values -->
+        <div class="grid lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- Mission -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-pro-blue hover:shadow-2xl transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="bg-pro-blue rounded-full p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark-teal">Misión</h3>
+                </div>
+                <p class="text-soft-gray leading-relaxed">
+                    Desarrollar y comercializar productos higiénicos de alta calidad que mejoren la vida de 
+                    las personas y contribuyan a un mundo más limpio y saludable, siempre con respeto por 
+                    el medio ambiente.
+                </p>
+            </div>
+
+            <!-- Vision -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-warm-green hover:shadow-2xl transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="bg-warm-green rounded-full p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark-teal">Visión</h3>
+                </div>
+                <p class="text-soft-gray leading-relaxed">
+                    Ser la empresa líder en productos higiénicos eco-amigables en América Latina para 2030, 
+                    reconocida por nuestra innovación, calidad y compromiso con la sostenibilidad ambiental.
+                </p>
+            </div>
+
+            <!-- Values -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-light-teal hover:shadow-2xl transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="bg-light-teal rounded-full p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark-teal">Valores</h3>
+                </div>
+                <div class="space-y-2 text-soft-gray">
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-light-teal rounded-full mr-3"></span>
+                        Calidad sin compromisos
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-light-teal rounded-full mr-3"></span>
+                        Responsabilidad ambiental
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-light-teal rounded-full mr-3"></span>
+                        Innovación constante
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-light-teal rounded-full mr-3"></span>
+                        Transparencia y ética
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Categories -->
+        <div class="bg-gradient-to-r from-pro-blue to-light-teal rounded-3xl p-8 lg:p-12 mb-16 text-white">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Nuestras Líneas de Productos</h2>
+                <p class="text-xl opacity-90">Soluciones completas para todas tus necesidades de limpieza</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center hover:bg-opacity-30 transition-all duration-300">
+                    <svg class="w-12 h-12 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 5.16-1 9-5.45 9-11V7l-10-5z"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2">Desinfectantes</h3>
+                    <p class="text-sm opacity-90">Eliminación efectiva de gérmenes y bacterias</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center hover:bg-opacity-30 transition-all duration-300">
+                    <svg class="w-12 h-12 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7.01 5 5 7.01 5 9.5S7.01 14 9.5 14 14 11.99 14 9.5 11.99 5 9.5 5z"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2">Detergentes</h3>
+                    <p class="text-sm opacity-90">Limpieza profunda para todo tipo de superficies</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center hover:bg-opacity-30 transition-all duration-300">
+                    <svg class="w-12 h-12 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2">Cuidado Personal</h3>
+                    <p class="text-sm opacity-90">Jabones y productos para higiene personal</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center hover:bg-opacity-30 transition-all duration-300">
+                    <svg class="w-12 h-12 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75Z"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2">Hogar</h3>
+                    <p class="text-sm opacity-90">Soluciones integrales para el cuidado del hogar</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="bg-white rounded-3xl shadow-2xl p-8 lg:p-12 mb-16 border border-gray-100">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-dark-teal mb-4">Nuestro Equipo Directivo</h2>
+                <p class="text-xl text-soft-gray">Líderes apasionados por la excelencia y la innovación</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-br from-pro-blue to-light-blue rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-teal mb-2">María González</h3>
+                    <p class="text-pro-blue font-semibold mb-2">CEO & Fundadora</p>
+                    <p class="text-soft-gray text-sm">25 años de experiencia en la industria química y cosmética</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-br from-warm-green to-light-teal rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-teal mb-2">Carlos Mendoza</h3>
+                    <p class="text-warm-green font-semibold mb-2">Director de I+D</p>
+                    <p class="text-soft-gray text-sm">Ingeniero Químico especializado en productos eco-amigables</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-br from-light-teal to-pro-blue rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-teal mb-2">Ana Ruiz</h3>
+                    <p class="text-light-teal font-semibold mb-2">Directora Comercial</p>
+                    <p class="text-soft-gray text-sm">MBA con especialización en mercados internacionales</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="bg-gradient-to-r from-dark-teal to-pro-blue rounded-3xl p-8 lg:p-12 text-white">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
                 <div>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-6">¿Qué hace este proyecto?</h3>
-                    <div class="space-y-4 text-gray-600">
-                        <p class="flex items-start">
-                            <span class="text-purple-500 mr-3 mt-1">•</span>
-                            Gestión de usuarios con funcionalidades CRUD
-                        </p>
-                        <p class="flex items-start">
-                            <span class="text-purple-500 mr-3 mt-1">•</span>
-                            Visualización de datos de alumnos y usuarios
-                        </p>
-                        <p class="flex items-start">
-                            <span class="text-purple-500 mr-3 mt-1">•</span>
-                            Navegación intuitiva entre diferentes secciones
-                        </p>
-                        <p class="flex items-start">
-                            <span class="text-purple-500 mr-3 mt-1">•</span>
-                            Diseño responsivo y moderno
-                        </p>
+                    <h2 class="text-4xl font-bold mb-6">Encontranos en</h2>
+                    <p class="text-xl mb-8 opacity-90">
+                        Estamos aquí para responder todas tus preguntas y colaborar contigo en tus 
+                        proyectos de limpieza y higiene.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span>Av. Corrientes 1648, Buenos Aires, Argentina</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <span>+54 11 38047375</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <span>contacto@cleansa.com</span>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl p-8 text-white">
-                    <h4 class="text-2xl font-bold mb-4">Tecnologías Utilizadas</h4>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
-                            <div class="font-semibold">Flask</div>
-                            <div class="text-sm opacity-90">Framework Web</div>
-                        </div>
-                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
-                            <div class="font-semibold">Python</div>
-                            <div class="text-sm opacity-90">Backend</div>
-                        </div>
-                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
-                            <div class="font-semibold">Jinja2</div>
-                            <div class="text-sm opacity-90">Templates</div>
-                        </div>
-                        <div class="bg-white bg-opacity-20 rounded-lg p-3 text-center">
-                            <div class="font-semibold">Tailwind</div>
-                            <div class="text-sm opacity-90">CSS Framework</div>
-                        </div>
-                    </div>
+                
+
+                <!----API Google Maps-->
+                <div class="text-center">
+                    
+                    <div id="map" class="w-full h-64 rounded-2xl"></div>
+                </div>
                 </div>
             </div>
         </div>
-
-     
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400">© 2024 Mi Proyecto Flask - Desarrollado con ❤️ usando Flask y Tailwind CSS</p>
-        </div>
-    </footer>
+    {% include 'components/footer.html' %}
+
+    <!-- Librerías externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script> 
+    
+    <!-- Scripts principales de CleanSA -->
+    <script src="{{ url_for('static', filename='js/about.js') }}"></script>
+
 </body>
 </html>

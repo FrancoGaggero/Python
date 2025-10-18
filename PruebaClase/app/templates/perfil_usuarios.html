@@ -73,19 +73,19 @@
                     </div>
                     
                     <!-- Acciones Rápidas -->
-                    <div class="mt-6 md:mt-0 flex flex-col gap-2">
+                    <div id="shop" class="mt-6 md:mt-0 flex flex-col gap-2">
                         <button class="bg-white bg-opacity-20 hover:bg-white hover:bg-opacity-30 text-white px-6 py-2 rounded-lg transition-all duration-200 flex items-center">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                             </svg>
                             Editar Perfil
                         </button>
-                        <button class="bg-white bg-opacity-20 hover:bg-white hover:bg-opacity-30 text-white px-6 py-2 rounded-lg transition-all duration-200 flex items-center">
+                        <a href="{{ url_for('users.carrito') }}" class="bg-white bg-opacity-20 hover:bg-white hover:bg-opacity-30 text-white px-6 py-2 rounded-lg transition-all duration-200 flex items-center">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                             </svg>
-                            Configuración
-                        </button>
+                            Carrito
+                        </a>
                     </div>
                 </div>
             </div>
@@ -419,28 +419,11 @@
 
     </main>
 
-    <script>
-        // Función para cambiar tabs
-        function switchTab(tabName) {
-            // Ocultar todos los contenidos de tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.add('hidden');
-            });
-            
-            // Remover clase activa de todos los botones
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active', 'border-pro-blue', 'text-pro-blue');
-                button.classList.add('border-transparent', 'text-soft-gray');
-            });
-            
-            // Mostrar el tab seleccionado
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-            
-            // Activar el botón correspondiente
-            event.target.classList.remove('border-transparent', 'text-soft-gray');
-            event.target.classList.add('active', 'border-pro-blue', 'text-pro-blue');
-        }
-    </script>
+    <!-- Librerías externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Scripts de la aplicación -->
+    <script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
 
 </body>
 </html>

@@ -8,9 +8,9 @@ from flask import Flask
 
 def create_app():
     """
-    Factory function para crear la aplicación Flask
+    Crea y configura la aplicación Flask CleanSA
     
-    Returns:
+    
         Flask: Instancia de la aplicación configurada
     """
     app = Flask(__name__)
@@ -44,18 +44,6 @@ def create_app():
     @app.errorhandler(500)
     def internal_error(error):
         return "Error interno del servidor - CleanSA", 500
-    
-    # ===================================
-    # CONTEXTO DE PLANTILLAS
-    # ===================================
-    
-    @app.context_processor
-    def inject_globals():
-        """Inyecta variables globales en todas las plantillas"""
-        return {
-            'company_name': 'CleanSA',
-            'company_slogan': 'Productos Higiénicos de Calidad'
-        }
     
     return app
 

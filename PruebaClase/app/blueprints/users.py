@@ -72,3 +72,9 @@ def panel():
 def perfil():
     """Vista de perfil personal del usuario logueado"""
     return render_template('perfil_usuarios.html')
+
+
+@users_bp.route('/carrito')
+def carrito():
+    """Vista del carrito de compras del usuario"""
+    return render_template('carrito.html')

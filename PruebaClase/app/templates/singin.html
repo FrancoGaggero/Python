@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,13 +22,13 @@
         }
     </script>
 </head>
-<body class="bg-smoke-white min-h-screen">
-    
-    <!-- Include Navigation Component -->
-    {% include 'components/nav.html' %}
+<body>
 
-    <!-- Login Content -->
-    <div class="flex items-center justify-center min-h-screen py-8 px-4">
+    <!-- Include Navigation Component -->
+    {% include 'components/nav.html' %} 
+
+<!-- SingIn Content -->
+ <div class="flex items-center justify-center min-h-screen py-8 px-4">
         
         <!-- Card Horizontal Principal -->
         <div class="login-card w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
@@ -105,8 +104,8 @@
                         
                         <!-- Header del formulario -->
                         <div class="text-center mb-8">
-                            <h2 class="text-3xl font-bold text-dark-teal mb-2">Iniciar Sesión</h2>
-                            <p class="text-soft-gray text-lg">Accede a tu cuenta CleanSA</p>
+                            <h2 class="text-3xl font-bold text-dark-teal mb-2">Registro</h2>
+                            <p class="text-soft-gray text-lg">Registrate  en nuestro sistema</p>
                             <div class="w-20 h-1 bg-gradient-to-r from-pro-blue to-light-teal mx-auto mt-4 rounded-full"></div>
                         </div>
 
@@ -158,8 +157,8 @@
                                         name="remember"
                                         class="h-4 w-4 text-pro-blue focus:ring-pro-blue border-gray-300 rounded"
                                     >
-                                    <label for="remember" class="ml-2 text-sm text-soft-gray">
-                                        Recordar sesión
+                                    <label for="remember" class="ml-2 text-sm text-soft-gray required">
+                                        Terminos y condiciones
                                     </label>
                                 </div>
                                 <a href="#" class="text-sm text-pro-blue hover:text-dark-teal hover:underline transition-colors duration-200">
@@ -175,27 +174,9 @@
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013 3v1"></path>
                                 </svg>
-                                <span>Iniciar Sesión</span>
+                                <span>Registrarme</span>
                             </button>
 
-                            <!-- Separador -->
-                            <div class="relative my-6">
-                                <div class="absolute inset-0 flex items-center">
-                                    <div class="w-full border-t border-gray-200"></div>
-                                </div>
-                                <div class="relative flex justify-center text-sm">
-                                    <span class="px-4 bg-smoke-white text-soft-gray">o</span>
-                                </div>
-                            </div>
-
-                            <!-- Botón registro -->
-                            <a href="{{ url_for('auth.singin') }}" class="flex items-center justify-center w-full bg-gradient-to-r from-warm-green to-light-teal hover:from-light-teal hover:to-warm-green text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                    Crear Cuenta Nueva
-
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-                            </svg>
-                            </a>
                             
 
                         </form>
@@ -215,18 +196,18 @@
         </div>
     </div>
 
-     
 
- 
+    <!---Card Principal-->
 
-
-
-
-
-     <!-- Librerías externas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     
-    <!-- Scripts principales de CleanSA -->
-    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <!---Card registro-->
+
+
+    <!---Card Animacion-->
+
+
+
+    <!---script para JS-->
+    <script src="{{ url_for('static', filename='js/singin.js') }}"></script>
 </body>
 </html>

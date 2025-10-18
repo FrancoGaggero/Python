@@ -22,7 +22,10 @@ def login():
     return render_template('login.html')
 
 
-
+@auth_bp.route('/singin')
+def singin():
+    """Página de registro de nuevo usuario"""
+    return render_template('singin.html')
 
 
 
