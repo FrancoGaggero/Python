@@ -38,9 +38,9 @@
                 <div class="flex flex-col md:flex-row items-center">
                     <!-- Avatar -->
                     <div class="relative mb-6 md:mb-0 md:mr-8">
-                        <div class="w-32 h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-6xl font-bold">
-                            FG
-                        </div>
+                        <svg class="w-32 h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-6xl font-bold">
+                            {{ current_user.nombre[0].upper() }}    
+                        </svg>
                         <button class="absolute bottom-0 right-0 bg-warm-green hover:bg-green-600 rounded-full p-2 shadow-lg transition-colors">
                             <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
@@ -50,20 +50,16 @@
                     
                     <!-- Información Principal -->
                     <div class="text-center md:text-left flex-1">
-                        <h1 class="text-4xl font-bold mb-2">Franco Gaggero</h1>
+                        <h1 class="text-4xl font-bold mb-2">{{ current_user.nombre }}</h1>
                         <p class="text-xl opacity-90 mb-4">Cliente</p>
                         <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm">
                             <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2">
-                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                                </svg>
-                                franco@cleansa.com
+                                
+                                {{ current_user.direccion }}
                             </div>
                             <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2">
-                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.68 14.91 16.08 14.82 16.43 14.94C17.55 15.31 18.75 15.51 20 15.51C20.55 15.51 21 15.96 21 16.51V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"/>
-                                </svg>
-                                +54 11 1234-5678
+                                
+                                {{ current_user.dni }}
                             </div>
                             <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2">
                                 <div class="w-3 h-3 bg-warm-green rounded-full mr-2"></div>

@@ -6,14 +6,14 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div id="main-title" class="flex items-center">
-                    <div class="bg-pro-blue rounded-lg p-2 mr-4">
-                        <svg class="w-8 h-8 text-smoke-white" fil  l="currentColor" viewBox="0 0 24 24">
+                    <div id="title" class="bg-pro-blue rounded-lg p-2 mr-4">
+                        <svg  class="w-8 h-8 text-smoke-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2L13.09 7.26L18 4L14.74 9.09L20 10L14.74 10.91L18 16L13.09 12.74L12 18L10.91 12.74L6 16L9.26 10.91L4 10L9.26 9.09L6 4L10.91 7.26L12 2Z"/>
                         </svg>
                     </div>
-                    <div class="text-lg">
+                    <div  class="text-lg">
                         <h1 class="text-3xl font-bold text-dark-teal">
-                            <a href="{{ url_for('main.home') }}" class="hover:text-pro-blue transition-colors">CleanSA</a>
+                            <a href="{{ url_for('main.home') }}"  class="hover:text-pro-blue transition-colors">CleanSA</a>
                         </h1>
                         <p class="text-pro-blue text-sm">Productos Higiénicos de Calidad</p>
                     </div>
@@ -21,10 +21,10 @@
                 
                 <!-- Navigation Menu -->
                 <nav class="hidden md:flex items-center space-x-6 sticky-top">
-                    <a href="{{ url_for('main.home') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                    <a href="{{ url_for('main.home') }}" class="text-pro-blue hover:text-dark-teal  transition-colors font-medium">
                         Inicio
                     </a>
-                    <a href="{{ url_for('products.list_products') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                    <a href="{{ url_for('products.list_products') }}" class="text-pro-blue hover:text-dark-teal  transition-colors font-medium">
                         Productos
                     </a>
 
@@ -49,7 +49,7 @@
                         <div class="w-2 h-2 bg-soft-gray rounded-full"></div>
                         
                         <a href="{{ url_for('auth.logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
-                            <span class="text-white font-medium">Chau, {{ current_user.nombre }}</span>
+                            <span class="text-white  font-medium">Chau, {{ current_user.nombre }}</span>
                         </a>
                     {% else %}
                         <!-- Opciones para usuario no autenticado -->
@@ -119,6 +119,29 @@
             if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', function() {
                     mobileMenu.classList.toggle('hidden');
+                });
+            }
+            // Animación especial para el logo CleanSA
+            const logoElement = document.querySelector('#title');
+            if (logoElement) {
+                logoElement.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: '#title',
+                        rotate: '5deg',
+                        scale: 1.1,
+                        duration: 300,
+                        easing: 'easeOutBack'
+                    });
+                });
+                
+                logoElement.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: '#title',
+                        rotate: '0deg',
+                        scale: 1,
+                        duration: 300,
+                        easing: 'easeOutBack'
+                    });
                 });
             }
         });
