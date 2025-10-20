@@ -25,6 +25,13 @@ def create_app():
     bcrypt.init_app(app) #Inicializar Bcrypt con la app
     login_manager = LoginManager()
     login_manager.init_app(app) # Integrando login con la app Flask
+    
+    # ===================================
+    # CONFIGURACIÓN DE LOGIN MANAGER
+    # ===================================
+    login_manager.login_view = 'auth.login'  # Ruta de login por defecto
+    login_manager.login_message = 'Por favor inicia sesión para acceder a esta página.'
+    login_manager.login_message_category = 'info'
 
     # ===================================
     # CONFIGURACIÓN BÁSICA DE BASE DE DATOS
@@ -33,6 +40,33 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pruebabbdd.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    
     database.init_app(app)
+    
+    # ===================================
+    # USER LOADER PARA FLASK-LOGIN
+    # ===================================
+    
+    @login_manager.user_loader
+    def load_user(user_id):
+        # Importar aquí para evitar circular imports
+        try:
+            from models import Usuario
+            return Usuario.query.get(int(user_id))
+        except Exception as e:
+            print(f"Error en user_loader: {e}")
+            return None
+    
+    # ===================================
+    # CREACIÓN DE TABLAS DE BASE DE DATOS
+    # ===================================
+    
+    with app.app_context():
+        try:
+            # Importar modelos para crear las tablas
+            from models import Usuario, Categoria, Producto, Carrito, Carrito_detalle
+            database.create_all()
+            print("Tablas de base de datos creadas correctamente")
+        except Exception as e:
+            print(f"Error creando tablas: {e}")
     
     # ===================================
     # REGISTRO DE BLUEPRINTS

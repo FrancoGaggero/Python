@@ -1,7 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+# Necesitas importar Bcrypt
+from flask_bcrypt import Bcrypt
 
 database = SQLAlchemy()
+bcrypt = Bcrypt()
 
 class Usuario (database.Model, UserMixin):
     __tablename__ = 'usuarios'  
@@ -54,4 +57,28 @@ class Envio (database.Model):
     fk_carrito = database.Column(database.Integer,database.ForeignKey('carritos.id'), nullable=False)
     fecha_entrega = database.Column(database.Date, nullable=False)
     direccion = database.Column(database.String(100), nullable=False)
+
+
+
+
+def cargarAdmin():
+    admin = Usuario.query.filter_by(nombre='franco').first()
+    if not admin:
+        hashed_password = Bcrypt().generate_password_hash('admin').decode('utf-8')
+        admin_user = Usuario(
+            nombre='franco',
+            apellido='gaggero',
+            password=hashed_password,
+            dni=43920434,
+            direccion='Francia 2461',
+            tipousuario=True,
+            tipo=True
+        )
+
+    try:
+        database.session.add(admin_user) 
+        database.session.commit()
+    except Exception as e:
+        ## Rollback en caso de error
+        database.session.rollback()
 
