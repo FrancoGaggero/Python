@@ -8,12 +8,14 @@ from flask import Flask, request, redirect, url_for, render_template
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
+from models import cargarAdmin
 
 # Initialize the database object
 database = SQLAlchemy()
 
 def create_app():
  
+
     
     # ===================================
     # CONFIGURACIÓN BÁSICA
@@ -40,6 +42,9 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pruebabbdd.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    
     database.init_app(app)
+    ### Cargar usuario administrador
+    cargarAdmin()
+
     
     # ===================================
     # USER LOADER PARA FLASK-LOGIN
