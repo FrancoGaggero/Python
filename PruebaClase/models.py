@@ -150,3 +150,83 @@ def cargarCliente():
             database.session.rollback()
             
 
+
+### Carga de Productos del sistema
+def cargarCategoriaProductos():
+    """Crear categorías de productos de prueba"""
+    categorias = ['Limpieza', 'Higiene', 'Cocina']
+    for cat_nombre in categorias:
+        categoria = Categoria.query.filter_by(nombre=cat_nombre).first()
+        if not categoria:
+            categoria = Categoria(nombre=cat_nombre)
+            try:
+                database.session.add(categoria)
+                database.session.commit()
+            except Exception as e:
+                database.session.rollback()
+
+
+def cargarProductos():
+    """Crear productos de prueba para CleanSA"""
+    productos = [
+        {
+            'nombre': 'Detergente Multiuso CleanSA', 
+            'precio': 15.99, 
+            'stock': 50,
+            'fk_categoria': 1,
+            'peligroso': False
+        },
+        {
+            'nombre': 'Desinfectante de Pisos', 
+            'precio': 18.50, 
+            'stock': 30,
+            'fk_categoria': 1,
+            'peligroso': True
+        },
+        {
+            'nombre': 'Jabón Antibacterial', 
+            'precio': 8.75, 
+            'stock': 100,
+            'fk_categoria': 2,
+            'peligroso': False
+        },
+        {
+            'nombre': 'Papel Higiénico Premium', 
+            'precio': 12.00, 
+            'stock': 75,
+            'fk_categoria': 2,
+            'peligroso': False
+        },
+        {
+            'nombre': 'Limpiador de Vidrios', 
+            'precio': 9.99, 
+            'stock': 40,
+            'fk_categoria': 1,
+            'peligroso': False
+        },
+        {
+            'nombre': 'Toallas de Papel', 
+            'precio': 6.50, 
+            'stock': 60,
+            'fk_categoria': 2,
+            'peligroso': False
+        }
+    ]
+    
+    for prod_info in productos:
+        producto = Producto.query.filter_by(nombre=prod_info['nombre']).first()
+        if not producto:
+            producto = Producto(
+                nombre=prod_info['nombre'],
+                precio=prod_info['precio'],
+                stock=prod_info['stock'],
+                fk_categoria=prod_info['fk_categoria'],
+                peligroso=prod_info['peligroso']
+            )
+            try:
+                database.session.add(producto)
+                database.session.commit()
+                print(f"✅ Producto creado: {prod_info['nombre']}")
+            except Exception as e:
+                database.session.rollback()
+                print(f"❌ Error creando producto {prod_info['nombre']}: {e}")

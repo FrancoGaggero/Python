@@ -71,13 +71,17 @@ def create_app():
     with app.app_context():
         try:
             # Importar modelos para crear las tablas
-            from models import Usuario, Categoria, Producto, Carrito, Carrito_detalle, cargarAdmin, cargarTipoUsuario, cargarCliente
+            from models import Usuario, Categoria, Producto, Carrito, Carrito_detalle, cargarAdmin, cargarTipoUsuario, cargarCliente, cargarCategoriaProductos, cargarProductos
+            
             database.create_all()
             print("Tablas de base de datos creadas correctamente")
             
-            #primero se carga los tipos de usuario
+            #primero se carga los tipos y categorias para evitar errores de llave foranea
             cargarTipoUsuario()
-            
+            cargarCategoriaProductos()
+
+            # Cargar productos
+            cargarProductos()
             # Cargar usuario administrador después de crear las tablas
             cargarAdmin()
             
