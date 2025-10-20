@@ -35,22 +35,48 @@ def login():
         
         if user and Bcrypt().check_password_hash(user.password, password):
             login_user(user)
-            return redirect(url_for('main.home'))
+            return redirect(url_for('users.perfil'))
         else:
             return render_template('login.html', error="Credenciales inválidas")
     return render_template('login.html')
 
 
-@auth_bp.route('/singin')
+@auth_bp.route('/singin' , methods=['GET', 'POST'])
 def singin():
     """Página de registro de nuevo usuario"""
+    if request.method == "POST":
+        nombre = request.form.get('nombre')
+        apellido = request.form.get('apellido')
+        password = request.form.get('password')
+        dni = request.form.get('dni')
+        direccion = request.form.get('direccion')
+        tipousuario = request.form.get('tipousuario') == 'true'
+        tipo = request.form.get('tipo') == 'true'
+        
+        hashed_password = Bcrypt().generate_password_hash(password).decode('utf-8')
+        
+        new_user = Usuario(
+            nombre=nombre,
+            apellido=apellido,
+            password=hashed_password,
+            dni=dni,
+            direccion=direccion,
+            tipousuario=tipousuario,
+            tipo=tipo
+        )
+        
+        database.session.add(new_user)
+        database.session.commit()
+        
+        return redirect(url_for('auth.login'))
+    
     return render_template('singin.html')
 
 
 @auth_bp.route('/logout')
 def logout():
     """Cerrar sesión del usuario"""
-    return redirect(url_for('main.home'))
+    return redirect(url_for('auth.login'))
 
 
 
