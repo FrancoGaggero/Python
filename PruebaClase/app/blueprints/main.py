@@ -25,7 +25,4 @@ def about():
     """Página de información sobre CleanSA"""
     return render_template('about.html')
 
-@main_bp.route('/test')
-def test():
-    """Página de prueba para Anime.js"""
-    return render_template('test.html')
+ 

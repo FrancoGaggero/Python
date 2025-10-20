@@ -8,6 +8,7 @@ class Usuario (database.Model, UserMixin):
     id = database.Column(database.Integer, primary_key=True)
     nombre = database.Column(database.String(100), nullable=False)
     apellido = database.Column(database.String(100), nullable=False)
+    password = database.Column(database.String(200), nullable=False)
     dni = database.Column(database.Integer, nullable=False)
     direccion = database.Column(database.String(100), nullable=False)
     tipousuario = database.Column(database.Boolean, nullable=False)
