@@ -27,16 +27,36 @@
                     <a href="{{ url_for('products.list_products') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
                         Productos
                     </a>
-                    <a href="{{ url_for('users.perfil') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
-                        Mi Perfil
-                    </a>
-                    <div class="w-2 h-2 bg-soft-gray rounded-full"></div>
-                    <a href="{{ url_for('admin.index') }}" class="bg-warm-green text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium">
-                        Panel Admin
-                    </a>
-                    <a href="{{ url_for('auth.login') }}" class="bg-pro-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                        Login
-                    </a>
+
+                    {% if current_user.is_authenticated %}
+                        <!-- Opciones para usuario autenticado -->
+                        
+                        {% if not current_user.es_admin %}
+                            <!-- Solo mostrar Mi Perfil si es cliente -->
+                            <a href="{{ url_for('users.perfil') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                                Mi Perfil
+                            </a>
+                        {% endif %}
+                        
+                        {% if current_user.es_admin %}
+                            <!-- Solo mostrar Panel Admin si es administrador -->
+                            <div class="w-2 h-2 bg-soft-gray rounded-full"></div>
+                            <a href="{{ url_for('admin.index') }}" class="bg-warm-green text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium">
+                                Panel Admin
+                            </a>
+                        {% endif %}
+                        
+                        <div class="w-2 h-2 bg-soft-gray rounded-full"></div>
+                        
+                        <a href="{{ url_for('auth.logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
+                            <span class="text-white font-medium">Chau, {{ current_user.nombre }}</span>
+                        </a>
+                    {% else %}
+                        <!-- Opciones para usuario no autenticado -->
+                        <a href="{{ url_for('auth.login') }}" class="bg-pro-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                            Login
+                        </a>
+                    {% endif %}
                 </nav>
 
                 <!-- Mobile Menu Button -->
@@ -58,15 +78,33 @@
                     <a href="{{ url_for('products.list_products') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium py-2">
                         Productos
                     </a>
-                    <a href="{{ url_for('users.perfil') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium py-2">
-                        Mi Perfil
-                    </a>
-                    <a href="{{ url_for('admin.index') }}" class="bg-warm-green text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium text-center">
-                        Panel Admin
-                    </a>
-                    <a href="{{ url_for('auth.login') }}" class="bg-pro-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center">
-                        Login
-                    </a>
+                    
+                    {% if current_user.is_authenticated %}
+                        <!-- Opciones móvil para usuario autenticado -->
+                        
+                        {% if not current_user.es_admin %}
+                            <!-- Solo mostrar Mi Perfil si es cliente -->
+                            <a href="{{ url_for('users.perfil') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium py-2">
+                                Mi Perfil
+                            </a>
+                        {% endif %}
+                        
+                        {% if current_user.es_admin %}
+                            <a href="{{ url_for('admin.index') }}" class="bg-warm-green text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium text-center">
+                                Panel Admin
+                            </a>
+                        {% endif %}
+                        
+                        <div class="text-pro-blue font-medium py-2 text-center">Hola, {{ current_user.nombre }}</div>
+                        <a href="{{ url_for('auth.logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium text-center">
+                            Cerrar Sesión
+                        </a>
+                    {% else %}
+                        <!-- Opciones móvil para usuario no autenticado -->
+                        <a href="{{ url_for('auth.login') }}" class="bg-pro-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center">
+                            Login
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

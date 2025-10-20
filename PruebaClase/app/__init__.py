@@ -8,15 +8,11 @@ from flask import Flask, request, redirect, url_for, render_template
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
-from models import cargarAdmin
 
-# Initialize the database object
-database = SQLAlchemy()
+# Importar la instancia de database desde models
+from models import database
 
 def create_app():
- 
-
-    
     # ===================================
     # CONFIGURACIÓN BÁSICA
     # ===================================
@@ -36,14 +32,22 @@ def create_app():
     login_manager.login_message_category = 'info'
 
     # ===================================
+    # CONTEXT PROCESSOR PARA TEMPLATES
+    # ===================================
+    
+    @app.context_processor
+    def inject_user():
+        """Hacer current_user disponible en todos los templates"""
+        from flask_login import current_user
+        return {'current_user': current_user}
+
+    # ===================================
     # CONFIGURACIÓN BÁSICA DE BASE DE DATOS
     # ===================================
     
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pruebabbdd.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    
     database.init_app(app)
-    ### Cargar usuario administrador
-    cargarAdmin()
 
     
     # ===================================
@@ -67,9 +71,20 @@ def create_app():
     with app.app_context():
         try:
             # Importar modelos para crear las tablas
-            from models import Usuario, Categoria, Producto, Carrito, Carrito_detalle
+            from models import Usuario, Categoria, Producto, Carrito, Carrito_detalle, cargarAdmin, cargarTipoUsuario, cargarCliente
             database.create_all()
             print("Tablas de base de datos creadas correctamente")
+            
+            #primero se carga los tipos de usuario
+            cargarTipoUsuario()
+            
+            # Cargar usuario administrador después de crear las tablas
+            cargarAdmin()
+            
+            # Cargar usuario cliente de prueba
+            cargarCliente()
+
+            
         except Exception as e:
             print(f"Error creando tablas: {e}")
     

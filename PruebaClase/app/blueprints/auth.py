@@ -35,7 +35,7 @@ def login():
         
         if user and Bcrypt().check_password_hash(user.password, password):
             login_user(user)
-            return redirect(url_for('users.perfil'))
+            return redirect(url_for('main.home'))
         else:
             return render_template('login.html', error="Credenciales inválidas")
     return render_template('login.html')
@@ -74,9 +74,11 @@ def singin():
 
 
 @auth_bp.route('/logout')
+@login_required
 def logout():
     """Cerrar sesión del usuario"""
-    return redirect(url_for('auth.login'))
+    logout_user()
+    return redirect(url_for('main.home'))
 
 
 

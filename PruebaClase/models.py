@@ -3,6 +3,7 @@ from flask_login import UserMixin
 # Necesitas importar Bcrypt
 from flask_bcrypt import Bcrypt
 
+# Esta instancia será inicializada desde __init__.py
 database = SQLAlchemy()
 bcrypt = Bcrypt()
 
@@ -14,8 +15,22 @@ class Usuario (database.Model, UserMixin):
     password = database.Column(database.String(200), nullable=False)
     dni = database.Column(database.Integer, nullable=False)
     direccion = database.Column(database.String(100), nullable=False)
-    tipousuario = database.Column(database.Boolean, nullable=False)
+    fk_tipousuario = database.Column(database.Integer,database.ForeignKey('tipousuarios.id'), nullable=False)
     tipo = database.Column(database.Boolean, nullable=False)
+
+    # Relación con TipoUsuario
+    tipo_usuario = database.relationship('TipoUsuario', backref='usuarios')
+    
+    @property
+    def es_admin(self):
+        """Propiedad para verificar si el usuario es administrador"""
+        return self.fk_tipousuario == 1
+
+
+class TipoUsuario (database.Model):
+    __tablename__ = 'tipousuarios'  
+    id = database.Column(database.Integer, primary_key=True)
+    nombre = database.Column(database.String(100), nullable=False)
 
 class Categoria (database.Model):
     __tablename__ = 'categorias'  
@@ -61,6 +76,32 @@ class Envio (database.Model):
 
 
 
+def cargarTipoUsuario():
+    ###### 1 PARA TIPO ADMINISTRADOR Y 2 PARA TIPO CLIENTE
+    tipo_admin = TipoUsuario.query.filter_by(nombre='Administrador').first()
+    if not tipo_admin:
+        tipo_admin = TipoUsuario(
+            nombre='Administrador'
+        )
+        try:
+            database.session.add(tipo_admin) 
+            database.session.commit()
+        except Exception as e:
+            database.session.rollback()
+    
+    tipo_cliente = TipoUsuario.query.filter_by(nombre='Cliente').first()
+    if not tipo_cliente:
+        tipo_cliente = TipoUsuario(
+            nombre='Cliente'
+        )
+        try:
+            database.session.add(tipo_cliente) 
+            database.session.commit()
+        except Exception as e:
+            database.session.rollback()
+
+
+
 def cargarAdmin():
     admin = Usuario.query.filter_by(nombre='franco').first()
     if not admin:
@@ -71,14 +112,41 @@ def cargarAdmin():
             password=hashed_password,
             dni=43920434,
             direccion='Francia 2461',
-            tipousuario=True,
+            fk_tipousuario=1,  # 1 = ID del tipo Administrador
             tipo=True
         )
 
-    try:
-        database.session.add(admin_user) 
-        database.session.commit()
-    except Exception as e:
-        ## Rollback en caso de error
-        database.session.rollback()
+        try:
+            database.session.add(admin_user) 
+            database.session.commit()
+            print("✅ Usuario administrador creado: franco")
+        except Exception as e:
+            ## Rollback en caso de error
+            database.session.rollback()
+            print(f"❌ Error creando admin: {e}")
+
+
+def cargarCliente():
+    """Crear un usuario cliente de prueba"""
+    cliente = Usuario.query.filter_by(nombre='gero').first()
+    if not cliente:
+        hashed_password = Bcrypt().generate_password_hash('1234').decode('utf-8')
+        cliente_user = Usuario(
+            nombre='gero',
+            apellido='test',
+            password=hashed_password,
+            dni=12345678,
+            direccion='Calle Falsa 123',
+            fk_tipousuario=2,  # 2 = ID del tipo Cliente
+            tipo=False
+        )
+
+        try:
+            database.session.add(cliente_user) 
+            database.session.commit()
+            
+        except Exception as e:
+            ## Rollback en caso de error
+            database.session.rollback()
+            
 
