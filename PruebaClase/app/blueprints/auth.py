@@ -73,6 +73,9 @@ def singin():
     return render_template('singin.html')
 
 
+
+
+
 @auth_bp.route('/logout')
 @login_required
 def logout():
