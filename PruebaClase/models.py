@@ -226,7 +226,7 @@ def cargarProductos():
             try:
                 database.session.add(producto)
                 database.session.commit()
-                print(f"✅ Producto creado: {prod_info['nombre']}")
+                
             except Exception as e:
                 database.session.rollback()
-                print(f"❌ Error creando producto {prod_info['nombre']}: {e}")
+                

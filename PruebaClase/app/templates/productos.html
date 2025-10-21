@@ -37,6 +37,7 @@
         
         {% if productos %}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!---una tarjeta por cada producto--->
                 {% for producto in productos %}
                     {% include 'components/producto.html' %}
                 {% endfor %}
@@ -44,10 +45,11 @@
         {% else %}
             <p class="text-gray-600">No hay productos disponibles en este momento.</p>
         {% endif %}
-        <!-- Footer -->
-        {% include 'components/footer.html' %}
-
-
+        
+    </main>
+    
+    <!-- Footer -->
+    {% include 'components/footer.html' %}
 
         <!-- Librerías externas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
