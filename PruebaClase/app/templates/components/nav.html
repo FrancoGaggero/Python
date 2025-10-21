@@ -34,7 +34,12 @@
                         {% if not current_user.es_admin %}
                             <!-- Solo mostrar Mi Perfil si es cliente -->
                             <a href="{{ url_for('users.perfil') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
-                                Mi Perfil
+                                 Perfil
+                            </a>
+
+                            <!--Solo se muestra a los perfiles tipo cliente-->
+                            <a href="{{ url_for('users.carrito') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                                Carrito
                             </a>
                         {% endif %}
                         
