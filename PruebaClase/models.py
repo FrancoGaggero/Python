@@ -155,6 +155,8 @@ def cargarCliente():
 def cargarCategoriaProductos():
     """Crear categorías de productos de prueba"""
     categorias = ['Limpieza', 'Higiene', 'Cocina']
+    categoria_ids = {}
+    
     for cat_nombre in categorias:
         categoria = Categoria.query.filter_by(nombre=cat_nombre).first()
         if not categoria:
@@ -162,53 +164,67 @@ def cargarCategoriaProductos():
             try:
                 database.session.add(categoria)
                 database.session.commit()
+                categoria_ids[cat_nombre] = categoria.id
             except Exception as e:
+                print(f"❌ Error al crear categoría {cat_nombre}: {e}")
                 database.session.rollback()
+        else:
+            categoria_ids[cat_nombre] = categoria.id
+    
+    return categoria_ids
 
 
 def cargarProductos():
     """Crear productos de prueba para CleanSA"""
+    # Obtener IDs de categorías dinámicamente
+    limpieza_cat = Categoria.query.filter_by(nombre='Limpieza').first()
+    higiene_cat = Categoria.query.filter_by(nombre='Higiene').first()
+    
+    if not limpieza_cat or not higiene_cat:
+        print("❌ Error: Las categorías deben crearse antes que los productos")
+        return
+    
     productos = [
         {
             'nombre': 'Detergente Multiuso CleanSA', 
             'precio': 15.99, 
             'stock': 50,
-            'fk_categoria': 1,
+            'fk_categoria': limpieza_cat.id,
             'peligroso': False
         },
         {
             'nombre': 'Desinfectante de Pisos', 
             'precio': 18.50, 
             'stock': 30,
-            'fk_categoria': 1,
+            'fk_categoria': limpieza_cat.id,
             'peligroso': True
         },
         {
             'nombre': 'Jabón Antibacterial', 
             'precio': 8.75, 
             'stock': 100,
-            'fk_categoria': 2,
+            'fk_categoria': higiene_cat.id,
             'peligroso': False
         },
         {
             'nombre': 'Papel Higiénico Premium', 
             'precio': 12.00, 
             'stock': 75,
-            'fk_categoria': 2,
+            'fk_categoria': higiene_cat.id,
             'peligroso': False
         },
         {
             'nombre': 'Limpiador de Vidrios', 
             'precio': 9.99, 
             'stock': 40,
-            'fk_categoria': 1,
+            'fk_categoria': limpieza_cat.id,
             'peligroso': False
         },
         {
             'nombre': 'Toallas de Papel', 
             'precio': 6.50, 
             'stock': 60,
-            'fk_categoria': 2,
+            'fk_categoria': higiene_cat.id,
             'peligroso': False
         }
     ]
@@ -226,7 +242,7 @@ def cargarProductos():
             try:
                 database.session.add(producto)
                 database.session.commit()
-                
             except Exception as e:
+                print(f"❌ Error al crear producto {prod_info['nombre']}: {e}")
                 database.session.rollback()
                 

@@ -3,8 +3,8 @@ CleanSA - Blueprint de Productos
 Gestión del catálogo de productos higiénicos
 """
 
-from flask import Blueprint, render_template, jsonify
-from models import Producto, Categoria, database
+from flask import Blueprint, render_template
+from models import Producto, Categoria
 
 # ===================================
 # BLUEPRINT DE PRODUCTOS
@@ -26,16 +26,14 @@ def list_products():
         # Obtener categorías para mostrar información completa
         categorias = {cat.id: cat.nombre for cat in Categoria.query.all()}
         
-        
-        
         return render_template('productos.html', 
                              productos=productos, 
                              categorias=categorias)
     except Exception as e:
-       
+        print(f"❌ Error al cargar productos: {e}")
         
         return render_template('productos.html', 
-                             productos=productos_ejemplo, 
+                             productos=[], 
                              categorias={})
 
 @products_bp.route('/panel')

@@ -3,7 +3,9 @@
 <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
     <div class="mb-4">
         <h3 class="text-lg font-semibold text-gray-800">{{ producto.nombre }}</h3>
-        <p class="text-gray-600 text-sm">{{ producto.descripcion }}</p>
+        {% if producto.descripcion %}
+            <p class="text-gray-600 text-sm">{{ producto.descripcion }}</p>
+        {% endif %}
     </div>
     
     <div class="flex items-center justify-between">
@@ -23,31 +25,16 @@
                 </span>
             {% endif %}
 
-            {% if not current_user.es_admin %}
-            <div class="flex items-center justify-between mt-4">
-                <button class="bg-light-teal hover:bg-pro-blue text-white px-4 py-2 rounded-lg">
-                    Agregar al Carrito
-                  
-                </button>
-            </div>
+            {% if current_user.is_authenticated and not current_user.es_admin %}
+                <div class="flex items-center justify-between mt-4">
+                    <button class="bg-light-teal hover:bg-pro-blue text-white px-4 py-2 rounded-lg">
+                        Agregar al Carrito
+                    </button>
+                </div>
             {% endif %}
         </div>
     </div>
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
