@@ -30,7 +30,7 @@ def list_products():
                              productos=productos, 
                              categorias=categorias)
     except Exception as e:
-        print(f"❌ Error al cargar productos: {e}")
+        
         
         return render_template('productos.html', 
                              productos=[], 
