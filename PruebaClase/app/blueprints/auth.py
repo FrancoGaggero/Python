@@ -50,7 +50,6 @@ def singin():
         password = request.form.get('password')
         dni = request.form.get('dni')
         direccion = request.form.get('direccion')
-        tipousuario = request.form.get('tipousuario') == 'true'
         tipo = request.form.get('tipo') == 'true'
         
         hashed_password = Bcrypt().generate_password_hash(password).decode('utf-8')
@@ -61,7 +60,7 @@ def singin():
             password=hashed_password,
             dni=dni,
             direccion=direccion,
-            tipousuario=tipousuario,
+            tipo_usuario=True,
             tipo=tipo
         )
         
