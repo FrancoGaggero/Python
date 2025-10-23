@@ -265,4 +265,98 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
+
+
+     ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    ///////////////////////////////////////////////////////################################################
+    /////////////////////WEB SPEECH API - RECONOCIMIENTO DE VOZ
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'es-AR'; // Idioma español de Argentina
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        const micButton = document.getElementById('micButton');
+        let isListening = false;
+
+        micButton.addEventListener('click', function() {
+            if (!isListening) {
+                // Cambiar estilo del botón mientras escucha
+                micButton.classList.remove('from-blue-500', 'to-blue-600', 'hover:from-blue-600', 'hover:to-blue-700');
+                micButton.classList.add('from-red-500', 'to-red-600', 'animate-pulse');
+                micButton.title = 'Escuchando... Habla ahora';
+                
+                recognition.start();
+                isListening = true;
+                
+            }
+        });
+
+        //////la API usa un evento en lugar de promesa 
+        recognition.addEventListener('result', function(event) {
+            const transcript = event.results[0][0].transcript.trim();
+            
+            
+            // Agregar el texto al input
+            tareaInput.value = transcript;
+            
+            // Enfocar el input para que el usuario vea el resultado
+            tareaInput.focus();
+        });
+
+        recognition.addEventListener('end', function() {
+            
+            
+            // Restaurar estilo original del botón
+            micButton.classList.remove('from-red-500', 'to-red-600', 'animate-pulse');
+            micButton.classList.add('from-blue-500', 'to-blue-600', 'hover:from-blue-600', 'hover:to-blue-700');
+            micButton.title = 'Agregar tarea por voz';
+            
+            isListening = false;
+        });
+
+        recognition.addEventListener('error', function(event) {
+            
+            
+            // Restaurar estilo del botón en caso de error
+            micButton.classList.remove('from-red-500', 'to-red-600', 'animate-pulse'); 
+            micButton.classList.add('from-blue-500', 'to-blue-600', 'hover:from-blue-600', 'hover:to-blue-700');
+            micButton.title = 'Agregar tarea por voz';
+            
+            isListening = false;
+        });
+
+    } else {
+        // Mostrar el botón pero deshabilitado si no hay soporte
+        const micButton = document.getElementById('micButton');
+        if (micButton) {
+            micButton.disabled = true;
+            micButton.classList.add('opacity-50', 'cursor-not-allowed');
+            micButton.title = 'Web Speech API no disponible en este navegador';
+            
+            micButton.addEventListener('click', function() {
+                alert('El navegador no soporta reconocimiento de voz.\n\nPor favor usa Chrome, Edge o Safari para esta funcionalidad.');
+            });
+        }
+        
+    }
+
+
 });
