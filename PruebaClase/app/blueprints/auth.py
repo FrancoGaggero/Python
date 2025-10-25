@@ -60,7 +60,7 @@ def singin():
             password=hashed_password,
             dni=dni,
             direccion=direccion,
-            tipo_usuario=True,
+            fk_tipousuario=2,  # Asignar tipo Cliente por defecto
             tipo=tipo
         )
         
