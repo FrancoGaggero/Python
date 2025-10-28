@@ -110,6 +110,13 @@
                             <div class="w-20 h-1 bg-gradient-to-r from-pro-blue to-light-teal mx-auto mt-4 rounded-full"></div>
                         </div>
 
+                        <!-- Mostrar mensaje de error si existe -->
+                        {% if error %}
+                        <div class="mb-4 p-4 rounded bg-red-50 border border-red-200 text-red-700">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+
                         <!-- Formulario -->
                         <form method="POST" class="space-y-6">
                             

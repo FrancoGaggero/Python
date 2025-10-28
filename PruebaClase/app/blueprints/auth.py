@@ -45,27 +45,33 @@ def login():
 def singin():
     """Página de registro de nuevo usuario"""
     if request.method == "POST":
-        nombre = request.form.get('nombre')
+        nombre = request.form.get('username')
         apellido = request.form.get('apellido')
         password = request.form.get('password')
         dni = request.form.get('dni')
         direccion = request.form.get('direccion')
-        tipo = request.form.get('tipo') == 'true'
+        tipo = bool(request.form.get('tipo'))  # Convertir a booleano
         
         hashed_password = Bcrypt().generate_password_hash(password).decode('utf-8')
         
-        new_user = Usuario(
-            nombre=nombre,
-            apellido=apellido,
-            password=hashed_password,
-            dni=dni,
-            direccion=direccion,
-            fk_tipousuario=2,  # Asignar tipo Cliente por defecto
-            tipo=tipo
-        )
-        
-        database.session.add(new_user)
-        database.session.commit()
+        user = Usuario.query.filter_by(dni=dni).first()
+
+        if user:
+            return render_template('singin.html', error="El DNI ya está registrado")
+        else:
+
+            new_user = Usuario(
+                nombre=nombre,
+                apellido=apellido,
+                password=hashed_password,
+                dni=dni,
+                direccion=direccion,
+                fk_tipousuario=2,  # Asignar tipo Cliente por defecto
+                tipo=tipo
+            )
+            
+            database.session.add(new_user)
+            database.session.commit()
         
         return redirect(url_for('auth.login'))
     
