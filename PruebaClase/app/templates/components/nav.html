@@ -40,10 +40,14 @@
                                  Perfil
                             </a>
 
-                            <!--Solo se muestra a los perfiles tipo cliente-->
-                            <a href="{{ url_for('users.carrito') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
-                                Carrito
-                            </a>
+                            <!--MOSTRAR SOLO SI HAY ALGO EN EL CARRITO-->
+                            {% if current_user.carrito and current_user.carrito|length > 0 %}
+                                <a href="{{ url_for('users.carrito') }}" class="text-pro-blue hover:text-dark-teal transition-colors font-medium">
+                                    Carrito
+                                    <!--Span con cantidad de productos del carrito-->
+                                    <span class="text-sm bg-light-blue text-dark-teal rounded-full px-2 py-1 ml-2">{{ current_user.carrito|length }}</span>
+                                </a>
+                            {% endif %}
                         {% endif %}
                         
                         {% if current_user.es_admin %}
