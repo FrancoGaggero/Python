@@ -41,33 +41,71 @@ def login():
     return render_template('login.html')
 
 
-@auth_bp.route('/singin' , methods=['GET', 'POST'])
+@auth_bp.route('/singin', methods=['GET', 'POST'])
 def singin():
     """Página de registro de nuevo usuario"""
     if request.method == "POST":
-        nombre = request.form.get('nombre')
+        # Obtener datos del formulario
+        username = request.form.get('username')
         apellido = request.form.get('apellido')
-        password = request.form.get('password')
         dni = request.form.get('dni')
         direccion = request.form.get('direccion')
-        tipo = request.form.get('tipo') == 'true'
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+        terms = request.form.get('terms')
         
+        # Validaciones
+        if not all([username, apellido, dni, direccion, password, confirm_password]):
+            return render_template('singin.html', error="Todos los campos son obligatorios")
+        
+        if password != confirm_password:
+            return render_template('singin.html', error="Las contraseñas no coinciden")
+        
+        if not terms:
+            return render_template('singin.html', error="Debes aceptar los términos y condiciones")
+        
+        # Validar DNI
+        try:
+            dni_int = int(dni)
+            if dni_int < 1000000 or dni_int > 99999999:
+                return render_template('singin.html', error="El DNI debe tener entre 7 y 8 dígitos")
+        except ValueError:
+            return render_template('singin.html', error="El DNI debe ser un número válido")
+        
+        # Verificar si el usuario ya existe
+        existing_user = Usuario.query.filter_by(nombre=username).first()
+        if existing_user:
+            return render_template('singin.html', error="El nombre de usuario ya existe")
+        
+        # Verificar si el DNI ya existe
+        existing_dni = Usuario.query.filter_by(dni=dni_int).first()
+        if existing_dni:
+            return render_template('singin.html', error="Ya existe un usuario registrado con este DNI")
+        
+        # Hash de la contraseña
         hashed_password = Bcrypt().generate_password_hash(password).decode('utf-8')
         
+        # Crear nuevo usuario tipo cliente
         new_user = Usuario(
-            nombre=nombre,
+            nombre=username,
             apellido=apellido,
             password=hashed_password,
-            dni=dni,
+            dni=dni_int,
             direccion=direccion,
-            tipo_usuario=True,
-            tipo=tipo
+            fk_tipousuario=2,  # 2 = Cliente (1=Admin, 2=Cliente)
+            tipo=False  # False para cliente
         )
         
-        database.session.add(new_user)
-        database.session.commit()
-        
-        return redirect(url_for('auth.login'))
+        try:
+            database.session.add(new_user)
+            database.session.commit()
+            
+            # Mensaje de éxito y redirección al login
+            return render_template('login.html', success="Registro exitoso. Ya puedes iniciar sesión con tu cuenta.")
+            
+        except Exception as e:
+            database.session.rollback()
+            return render_template('singin.html', error="Error al registrar usuario. Inténtalo de nuevo.")
     
     return render_template('singin.html')
 
