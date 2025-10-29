@@ -102,13 +102,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold text-dark-teal">
-                            {% set total_stock = 0 %}
-                            {% for producto in productos %}
-                                {% set total_stock = total_stock + producto.stock %}
-                            {% endfor %}
-                            {{ total_stock }}
-                        </p>
+                        <p class="text-3xl font-bold text-dark-teal">{{ total_stock }}</p>
                         <p class="text-soft-gray text-sm">Unidades en Stock</p>
                     </div>
                 </div>
@@ -123,13 +117,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold text-dark-teal">
-                            {% set valor_total = 0 %}
-                            {% for producto in productos %}
-                                {% set valor_total = valor_total + (producto.precio * producto.stock) %}
-                            {% endfor %}
-                            ${{ "{:,.0f}".format(valor_total) }}
-                        </p>
+                        <p class="text-3xl font-bold text-dark-teal">${{ "{:,.0f}".format(valor_inventario) }}</p>
                         <p class="text-soft-gray text-sm">Valor Inventario</p>
                     </div>
                 </div>
@@ -144,17 +132,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold text-dark-teal">
-                            {% if productos %}
-                                {% set precio_promedio = 0 %}
-                                {% for producto in productos %}
-                                    {% set precio_promedio = precio_promedio + producto.precio %}
-                                {% endfor %}
-                                ${{ "{:,.0f}".format(precio_promedio / productos|length) }}
-                            {% else %}
-                                $0
-                            {% endif %}
-                        </p>
+                        <p class="text-3xl font-bold text-dark-teal">${{ "{:,.0f}".format(precio_promedio) }}</p>
                         <p class="text-soft-gray text-sm">Precio Promedio</p>
                     </div>
                 </div>

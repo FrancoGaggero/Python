@@ -40,13 +40,24 @@ def panel():
         categorias_list = Categoria.query.all()
         categorias = {cat.id: cat.nombre for cat in categorias_list}
         
+        # Calcular estadísticas
+        total_stock = sum(producto.stock for producto in productos)
+        valor_inventario = sum(producto.precio * producto.stock for producto in productos)
+        precio_promedio = sum(producto.precio for producto in productos) / len(productos) if productos else 0
+        
         return render_template('panel_productos.html', 
                              productos=productos,
-                             categorias=categorias)
+                             categorias=categorias,
+                             total_stock=total_stock,
+                             valor_inventario=valor_inventario,
+                             precio_promedio=precio_promedio)
     except Exception as e:
         return render_template('panel_productos.html', 
                              productos=[],
-                             categorias={})
+                             categorias={},
+                             total_stock=0,
+                             valor_inventario=0,
+                             precio_promedio=0)
 
 
 
