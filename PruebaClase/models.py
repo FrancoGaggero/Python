@@ -21,10 +21,29 @@ class Usuario (database.Model, UserMixin):
     # Relación con TipoUsuario
     tipo_usuario = database.relationship('TipoUsuario', backref='usuarios')
     
+
+
+    """"Verificación de tipo de usuario"""
     @property
     def es_admin(self):
         """Propiedad para verificar si el usuario es administrador"""
         return self.fk_tipousuario == 1
+
+
+    @property
+    def es_cliente(self):
+        """Propiedad para verificar si el usuario es cliente"""
+        return self.fk_tipousuario == 2
+
+    @property
+    def es_empresa(self):
+        """Propiedad para verificar si el usuario es empresa"""
+        return self.tipo == True
+
+    @property
+    def es_particular(self):
+        """Propiedad para verificar si el usuario es particular"""
+        return self.tipo == False
 
 
 class TipoUsuario (database.Model):
