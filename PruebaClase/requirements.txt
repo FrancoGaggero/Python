@@ -3,3 +3,4 @@ Werkzeug==2.3.7
 flask_bcrypt
 flask_login
 flask_sqlalchemy
+python_dotenv==2.3.2
