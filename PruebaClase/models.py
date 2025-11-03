@@ -45,6 +45,26 @@ class Usuario (database.Model, UserMixin):
         """Propiedad para verificar si el usuario es particular"""
         return self.tipo == False
 
+    # Métodos requeridos por Flask-Login (aunque UserMixin los proporciona, es bueno tenerlos explícitos)
+    def get_id(self):
+        """Método requerido por Flask-Login para obtener el ID del usuario"""
+        return str(self.id)
+    
+    def is_authenticated(self):
+        """Método requerido por Flask-Login"""
+        return True
+    
+    def is_active(self):
+        """Método requerido por Flask-Login"""
+        return True
+    
+    def is_anonymous(self):
+        """Método requerido por Flask-Login"""
+        return False
+
+    def __repr__(self):
+        return f'<Usuario {self.nombre} {self.apellido}>'
+
 
 class TipoUsuario (database.Model):
     __tablename__ = 'tipousuarios'  

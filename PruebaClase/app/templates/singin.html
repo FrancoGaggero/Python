@@ -103,10 +103,10 @@
                     <div class="w-full max-w-md">
                         
                         <!-- Header del formulario -->
-                        <div class="text-center mb-8">
-                            <h2 class="text-3xl font-bold text-dark-teal mb-2">Registro</h2>
-                            <p class="text-soft-gray text-lg">Registrate en nuestro sistema</p>
-                            <div class="w-20 h-1 bg-gradient-to-r from-pro-blue to-light-teal mx-auto mt-4 rounded-full"></div>
+                        <div class="text-center mb-6">
+                            <h2 class="text-2xl font-bold text-dark-teal mb-1">Registro</h2>
+                            <p class="text-soft-gray">Registrate en nuestro sistema</p>
+                            <div class="w-20 h-1 bg-gradient-to-r from-pro-blue to-light-teal mx-auto mt-3 rounded-full"></div>
                         </div>
 
                         <!-- Mensajes de error -->
@@ -122,68 +122,114 @@
                         {% endif %}
 
                         <!-- Formulario -->
-                        <form method="POST" class="space-y-6">
+                        <form method="POST" class="space-y-4">
                             
-                            <!-- Campo Usuario -->
-                            <div class="form-group">
-                                <label for="username" class="block text-sm font-medium text-dark-teal mb-2">
-                                    <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                    </svg>
-                                    Usuario
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="username" 
-                                    name="username" 
-                                    required
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue transform hover:scale-105"
-                                    placeholder="Ingresa tu nombre de usuario"
-                                >
+                            <!-- Fila 1: Usuario y Apellido -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Campo Usuario -->
+                                <div class="form-group">
+                                    <label for="username" class="block text-sm font-medium text-dark-teal mb-1">
+                                        <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                        Usuario
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="username" 
+                                        name="username" 
+                                        required
+                                        class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue text-sm"
+                                        placeholder="Tu nombre"
+                                    >
+                                </div>
+
+                                <!-- Campo Apellido -->
+                                <div class="form-group">
+                                    <label for="apellido" class="block text-sm font-medium text-dark-teal mb-1">
+                                        <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                        Apellido
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="apellido" 
+                                        name="apellido" 
+                                        required
+                                        class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue text-sm"
+                                        placeholder="Tu apellido"
+                                    >
+                                </div>
                             </div>
 
-                            <!-- Campo Apellido -->
-                            <div class="form-group">
-                                <label for="apellido" class="block text-sm font-medium text-dark-teal mb-2">
-                                    <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                    </svg>
-                                    Apellido
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="apellido" 
-                                    name="apellido" 
-                                    required
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue transform hover:scale-105"
-                                    placeholder="Ingresa tu apellido"
-                                >
+                            <!-- Fila 2: DNI y Tipo de Usuario -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Campo DNI -->
+                                <div class="form-group">
+                                    <label for="dni" class="block text-sm font-medium text-dark-teal mb-1">
+                                        <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                        </svg>
+                                        DNI
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        id="dni" 
+                                        name="dni" 
+                                        required
+                                        min="1000000"
+                                        max="99999999"
+                                        class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue text-sm"
+                                        placeholder="Ej: 12345678"
+                                    >
+                                </div>
+
+                                <!-- Tipo de Usuario -->
+                                <div class="form-group">
+                                    <label class="block text-sm font-medium text-dark-teal mb-1">
+                                        <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+                                        </svg>
+                                        Tipo de Usuario
+                                    </label>
+                                    <div class="flex gap-2">
+                                        <!-- Opción Particular -->
+                                        <label class="flex-1 cursor-pointer">
+                                            <input 
+                                                type="radio" 
+                                                name="tipo_usuario" 
+                                                value="particular"
+                                                checked
+                                                class="sr-only"
+                                            >
+                                            <div class="particular-option p-2 border-2 border-gray-200 rounded-lg text-center hover:border-light-blue transition-all duration-300 text-xs">
+                                                <div class="text-green-600 mb-1">👤</div>
+                                                <div class="font-medium">Particular</div>
+                                            </div>
+                                        </label>
+                                        
+                                        <!-- Opción Empresa -->
+                                        <label class="flex-1 cursor-pointer">
+                                            <input 
+                                                type="radio" 
+                                                name="tipo_usuario" 
+                                                value="empresa"
+                                                class="sr-only"
+                                            >
+                                            <div class="empresa-option p-2 border-2 border-gray-200 rounded-lg text-center hover:border-light-blue transition-all duration-300 text-xs">
+                                                <div class="text-blue-600 mb-1">🏢</div>
+                                                <div class="font-medium">Empresa</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Campo DNI -->
+                            <!-- Campo Dirección (ancho completo) -->
                             <div class="form-group">
-                                <label for="dni" class="block text-sm font-medium text-dark-teal mb-2">
-                                    <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-                                    </svg>
-                                    DNI
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="dni" 
-                                    name="dni" 
-                                    required
-                                    min="1000000"
-                                    max="99999999"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue transform hover:scale-105"
-                                    placeholder="Ingresa tu DNI (sin puntos)"
-                                >
-                            </div>
-
-                            <!-- Campo Dirección -->
-                            <div class="form-group">
-                                <label for="direccion" class="block text-sm font-medium text-dark-teal mb-2">
-                                    <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <label for="direccion" class="block text-sm font-medium text-dark-teal mb-1">
+                                    <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                     </svg>
                                     Dirección
@@ -193,99 +239,93 @@
                                     id="direccion" 
                                     name="direccion" 
                                     required
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue transform hover:scale-105"
-                                    placeholder="Ingresa tu dirección completa"
+                                    class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue text-sm"
+                                    placeholder="Tu dirección completa"
                                 >
                             </div>
 
-                            <!-- Campo Contraseña -->
-                            <div class="form-group">
-                                <label for="password" class="block text-sm font-medium text-dark-teal mb-2">
-                                    <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M6 10v2h12v-2a6 6 0 10-12 0zm6-8a8 8 0 018 8v2h1a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1v-8a1 1 0 011-1h1v-2a8 8 0 018-8z"/>
-                                    </svg>
-                                    Contraseña
-                                </label>
-                                <input 
-                                    type="password" 
-                                    id="password" 
-                                    name="password" 
-                                    required
-                                    minlength="4"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue transform hover:scale-105"
-                                    placeholder="Crea una contraseña segura"
-                                >
-                            </div>
+                            <!-- Fila 3: Contraseñas -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Campo Contraseña -->
+                                <div class="form-group">
+                                    <label for="password" class="block text-sm font-medium text-dark-teal mb-1">
+                                        <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M6 10v2h12v-2a6 6 0 10-12 0zm6-8a8 8 0 018 8v2h1a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1v-8a1 1 0 011-1h1v-2a8 8 0 018-8z"/>
+                                        </svg>
+                                        Contraseña
+                                    </label>
+                                    <input 
+                                        type="password" 
+                                        id="password" 
+                                        name="password" 
+                                        required
+                                        minlength="4"
+                                        class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue text-sm"
+                                        placeholder="Mín. 4 caracteres"
+                                    >
+                                </div>
 
-                            <!-- Campo Confirmar Contraseña -->
-                            <div class="form-group">
-                                <label for="confirm_password" class="block text-sm font-medium text-dark-teal mb-2">
-                                    <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 7C13.4 7 14.8 8.6 14.8 10V11.5C15.4 11.5 16 12.4 16 13V16C16 16.6 15.6 17 15 17H9C8.4 17 8 16.6 8 16V13C8 12.4 8.4 11.5 9 11.5V10C9 8.6 10.6 7 12 7M12 8.2C11.2 8.2 10.2 9.2 10.2 10V11.5H13.8V10C13.8 9.2 12.8 8.2 12 8.2Z"/>
-                                    </svg>
-                                    Confirmar Contraseña
-                                </label>
-                                <input 
-                                    type="password" 
-                                    id="confirm_password" 
-                                    name="confirm_password" 
-                                    required
-                                    minlength="4"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue transform hover:scale-105"
-                                    placeholder="Confirma tu contraseña"
-                                >
+                                <!-- Campo Confirmar Contraseña -->
+                                <div class="form-group">
+                                    <label for="confirm_password" class="block text-sm font-medium text-dark-teal mb-1">
+                                        <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 7C13.4 7 14.8 8.6 14.8 10V11.5C15.4 11.5 16 12.4 16 13V16C16 16.6 15.6 17 15 17H9C8.4 17 8 16.6 8 16V13C8 12.4 8.4 11.5 9 11.5V10C9 8.6 10.6 7 12 7M12 8.2C11.2 8.2 10.2 9.2 10.2 10V11.5H13.8V10C13.8 9.2 12.8 8.2 12 8.2Z"/>
+                                        </svg>
+                                        Confirmar
+                                    </label>
+                                    <input 
+                                        type="password" 
+                                        id="confirm_password" 
+                                        name="confirm_password" 
+                                        required
+                                        minlength="4"
+                                        class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pro-blue focus:border-pro-blue transition-all duration-300 bg-white hover:border-light-blue text-sm"
+                                        placeholder="Repite la contraseña"
+                                    >
+                                </div>
                             </div>
 
                             <!-- Términos y condiciones -->
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <input 
-                                        type="checkbox" 
-                                        id="terms" 
-                                        name="terms"
-                                        required
-                                        class="h-4 w-4 text-pro-blue focus:ring-pro-blue border-gray-300 rounded"
-                                    >
-                                    <label for="terms" class="ml-2 text-sm text-soft-gray">
-                                        Acepto los <a href="#" class="text-pro-blue hover:underline">términos y condiciones</a>
-                                    </label>
-                                </div>
+                            <div class="flex items-center">
+                                <input 
+                                    type="checkbox" 
+                                    id="terms" 
+                                    name="terms"
+                                    required
+                                    class="h-4 w-4 text-pro-blue focus:ring-pro-blue border-gray-300 rounded"
+                                >
+                                <label for="terms" class="ml-2 text-sm text-soft-gray">
+                                    Acepto los <a href="#" class="text-pro-blue hover:underline">términos y condiciones</a>
+                                </label>
                             </div>
 
-                            <!-- Botón de registro -->
-                            <button 
-                                type="submit"
-                                class="w-full bg-gradient-to-r from-pro-blue to-light-blue hover:from-dark-teal hover:to-pro-blue text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                            >
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-                                </svg>
-                                <span>Registrarme</span>
-                            </button>
+                            <!-- Botones de acción -->
+                            <div class="space-y-3">
+                                <!-- Botón de registro -->
+                                <button 
+                                    type="submit"
+                                    class="w-full bg-gradient-to-r from-pro-blue to-light-blue hover:from-dark-teal hover:to-pro-blue text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                                >
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                                    </svg>
+                                    <span>Registrarme</span>
+                                </button>
 
-                            <!-- Separador -->
-                            <div class="relative my-6">
-                                <div class="absolute inset-0 flex items-center">
-                                    <div class="w-full border-t border-gray-200"></div>
-                                </div>
-                                <div class="relative flex justify-center text-sm">
-                                    <span class="px-4 bg-smoke-white text-soft-gray">o</span>
-                                </div>
+                                <!-- Enlace a login -->
+                                <a href="{{ url_for('auth.login') }}" class="flex items-center justify-center w-full bg-gradient-to-r from-light-teal to-warm-green hover:from-warm-green hover:to-light-teal text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013 3v1"></path>
+                                    </svg>
+                                    <span>Ya tengo cuenta - Iniciar Sesión</span>
+                                </a>
                             </div>
-
-                            <!-- Enlace a login -->
-                            <a href="{{ url_for('auth.login') }}" class="flex items-center justify-center w-full bg-gradient-to-r from-light-teal to-warm-green hover:from-warm-green hover:to-light-teal text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013 3v1"></path>
-                                </svg>
-                                <span>Ya tengo cuenta - Iniciar Sesión</span>
-                            </a>
 
                         </form>
 
                         <!-- Información adicional -->
-                        <div class="text-center mt-8 pt-6 border-t border-gray-200">
-                            <p class="text-sm text-soft-gray mb-2">
+                        <div class="text-center mt-6 pt-4 border-t border-gray-200">
+                            <p class="text-sm text-soft-gray mb-1">
                                 Sistema de gestión CleanSA v2.0
                             </p>
                             <p class="text-xs text-gray-400">
@@ -311,5 +351,47 @@
 
     <!---script para JS-->
     <script src="{{ url_for('static', filename='js/singin.js') }}"></script>
+    
+    <script>
+        // Script para manejar la selección de tipo de usuario
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="tipo_usuario"]');
+            
+            radioButtons.forEach((radio) => {
+                radio.addEventListener('change', function() {
+                    // Resetear todos los contenedores
+                    document.querySelectorAll('.particular-option, .empresa-option').forEach(option => {
+                        option.classList.remove('border-pro-blue', 'bg-blue-50', 'shadow-md');
+                        option.classList.add('border-gray-200');
+                    });
+                    
+                    // Activar el contenedor seleccionado
+                    if (this.checked) {
+                        const optionDiv = this.nextElementSibling;
+                        optionDiv.classList.remove('border-gray-200');
+                        optionDiv.classList.add('border-pro-blue', 'bg-blue-50', 'shadow-md');
+                    }
+                });
+                
+                // Aplicar estilo inicial al radio button marcado por defecto
+                if (radio.checked) {
+                    const optionDiv = radio.nextElementSibling;
+                    optionDiv.classList.remove('border-gray-200');
+                    optionDiv.classList.add('border-pro-blue', 'bg-blue-50', 'shadow-md');
+                }
+            });
+
+            // Manejar clicks en las etiquetas
+            document.querySelectorAll('label[class*="cursor-pointer"]').forEach(label => {
+                label.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    if (radio) {
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change'));
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

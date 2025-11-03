@@ -3,9 +3,8 @@ CleanSA - Blueprint de Autenticación
 Rutas para gestionar login y autenticación del sistema
 """
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-from models import Usuario, database
+from models import Usuario, database, bcrypt
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -30,14 +29,25 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         
+        # Buscar el usuario en la base de datos
         user = Usuario.query.filter_by(nombre=username).first()
         
-        
-        if user and Bcrypt().check_password_hash(user.password, password):
-            login_user(user)
-            return redirect(url_for('main.home'))
+        if user:
+            print(f"DEBUG: Usuario encontrado - ID: {user.id}, Nombre: {user.nombre}")
+            # Verificar la contraseña
+            password_check = bcrypt.check_password_hash(user.password, password)
+            print(f"DEBUG: Verificación de contraseña: {password_check}")
+            
+            if password_check:
+                login_user(user)
+                print(f"DEBUG: Login exitoso para usuario {user.nombre}")
+                return redirect(url_for('main.home'))
+            else:
+                print(f"DEBUG: Contraseña incorrecta para usuario {user.nombre}")
+                return render_template('login.html', error="Contraseña incorrecta")
         else:
-            return render_template('login.html', error="Credenciales inválidas")
+            print(f"DEBUG: Usuario no encontrado: {username}")
+            return render_template('login.html', error="Usuario no encontrado")
     return render_template('login.html')
 
 
@@ -53,6 +63,7 @@ def singin():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
         terms = request.form.get('terms')
+        tipo_usuario = request.form.get('tipo_usuario')  # 'particular' o 'empresa'
         
         # Validaciones
         if not all([username, apellido, dni, direccion, password, confirm_password]):
@@ -63,6 +74,9 @@ def singin():
         
         if not terms:
             return render_template('singin.html', error="Debes aceptar los términos y condiciones")
+        
+        if not tipo_usuario:
+            return render_template('singin.html', error="Debes seleccionar el tipo de usuario")
         
         # Validar DNI
         try:
@@ -83,7 +97,10 @@ def singin():
             return render_template('singin.html', error="Ya existe un usuario registrado con este DNI")
         
         # Hash de la contraseña
-        hashed_password = Bcrypt().generate_password_hash(password).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        
+        # Determinar el tipo de usuario (True = Empresa, False = Particular)
+        es_empresa = True if tipo_usuario == 'empresa' else False
         
         # Crear nuevo usuario tipo cliente
         new_user = Usuario(
@@ -93,18 +110,22 @@ def singin():
             dni=dni_int,
             direccion=direccion,
             fk_tipousuario=2,  # 2 = Cliente (1=Admin, 2=Cliente)
-            tipo=False  # False para cliente
+            tipo=es_empresa  # True para empresa, False para particular
         )
         
         try:
             database.session.add(new_user)
+            database.session.flush()  # Forzar la escritura a la base de datos
             database.session.commit()
+            
+            print(f"DEBUG: Usuario registrado exitosamente - ID: {new_user.id}, Nombre: {new_user.nombre}")
             
             # Mensaje de éxito y redirección al login
             return render_template('login.html', success="Registro exitoso. Ya puedes iniciar sesión con tu cuenta.")
             
         except Exception as e:
             database.session.rollback()
+            print(f"ERROR al registrar usuario: {e}")  # Para debugging
             return render_template('singin.html', error="Error al registrar usuario. Inténtalo de nuevo.")
     
     return render_template('singin.html')

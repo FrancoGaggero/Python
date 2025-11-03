@@ -10,7 +10,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from flask_sqlalchemy import SQLAlchemy
 
 # Importar la instancia de database desde models
-from models import database
+from models import database, bcrypt
 
 def create_app():
     # ===================================
@@ -18,9 +18,9 @@ def create_app():
     # ===================================
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'supersecretkey'
-    bcrypt = Bcrypt()
-    # Inicializamos Bcrypt y LoginManager
-    bcrypt.init_app(app) #Inicializar Bcrypt con la app
+    
+    # Inicializamos Bcrypt y LoginManager con las instancias de models.py
+    bcrypt.init_app(app) # Usar la instancia global de bcrypt
     login_manager = LoginManager()
     login_manager.init_app(app) # Integrando login con la app Flask
     
