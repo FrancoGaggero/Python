@@ -9,7 +9,9 @@ Plataforma de gestión de ventas y clientes.
 - SQLAlchemy
 
 # Render 
-- https://python-lw6o.onrender.com/
+- <a href="https://python-lw6o.onrender.com/" target="_blank">Hosting de la Web</a>
+
+ 
 ---
 
 Proyecto final para:  
