@@ -10,7 +10,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from flask_sqlalchemy import SQLAlchemy
 
 # Importar la instancia de database desde models
-from models import database, bcrypt
+from app.models import database, bcrypt
 
 def create_app():
     # ===================================
@@ -58,7 +58,7 @@ def create_app():
     def load_user(user_id):
         # Importar aquí para evitar circular imports
         try:
-            from models import Usuario
+            from app.models import Usuario
             return Usuario.query.get(int(user_id))
         except Exception as e:
             print(f"Error en user_loader: {e}")
@@ -71,7 +71,7 @@ def create_app():
     with app.app_context():
         try:
             # Importar modelos para crear las tablas
-            from models import Usuario, Categoria, Producto, Carrito, Carrito_detalle, cargarAdmin, cargarTipoUsuario, cargarCliente, cargarCategoriaProductos, cargarProductos
+            from app.models import Usuario, Categoria, Producto, Carrito, Carrito_detalle, cargarAdmin, cargarTipoUsuario, cargarCliente, cargarCategoriaProductos, cargarProductos
             
             database.create_all()
             print("Tablas de base de datos creadas correctamente")

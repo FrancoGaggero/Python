@@ -4,7 +4,7 @@ Gestión de usuarios y clientes del sistema
 """
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from models import Usuario, database
+from app.models import Usuario, database
 
 # ===================================
 # BLUEPRINT DE USUARIOS

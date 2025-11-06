@@ -4,7 +4,7 @@ Gestión del catálogo de productos higiénicos
 """
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from models import Producto, Categoria
+from app.models import Producto, Categoria
 from app import database
 
 # ===================================

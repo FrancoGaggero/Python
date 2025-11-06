@@ -4,7 +4,7 @@ Rutas para gestionar login y autenticación del sistema
 """
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-from models import Usuario, database, bcrypt
+from app.models import Usuario, database, bcrypt
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
