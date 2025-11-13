@@ -46,6 +46,12 @@
                                 <span class="nav-link-hover"></span>
                             </a>
 
+                            <!-- Vista IA solo para cliente -->
+                            <a href="{{ url_for('ia.ia') }}" class="nav-link-glass">
+                                <span class="nav-link-content">IA</span>
+                                <span class="nav-link-hover"></span>
+                            </a>
+
                             <!--MOSTRAR SOLO SI HAY ALGO EN EL CARRITO-->
                             {% if current_user.carrito and current_user.carrito|length > 0 %}
                                 <a href="{{ url_for('users.carrito') }}" class="nav-link-glass nav-cart-link">

@@ -9,6 +9,7 @@ from .products import products_bp
 from .employees import employees_bp
 from .users import users_bp
 from .auth import auth_bp
+from .ia import ia_bp
 
 # Lista de todos los blueprints para registrar en la app
 ALL_BLUEPRINTS = [
@@ -17,7 +18,8 @@ ALL_BLUEPRINTS = [
     products_bp,
     employees_bp,
     users_bp,
-    auth_bp
+    auth_bp,
+    ia_bp
 ]
 
 __all__ = [

@@ -1,5 +1,7 @@
 from app import create_app
 from dotenv import load_dotenv
+from joblib import load
+
 import os
 
 app = create_app()
@@ -14,6 +16,9 @@ if __name__ == "__main__":
     )
 
  
+## py -m venv venv (Creamos el entorno)
+## pip install --upgrade pip (Instalamos dependencias de gestor de paquetes)
+## pip install flask scikit-learn joblib flask-cors (Instalamos los paquetes de scikit-learn)
 
 
 
