@@ -22,28 +22,16 @@ def predict():
     # Endpoint para el formulario (retorna HTML)
     text = request.form.get("text", "")
     if not text:
-        return render_template("index.html", error="Ingresá un texto para analizar.")
+        return render_template("ia.html", error="Ingresá un texto para analizar.")
     # predicción
     pred = model.predict([text])[0]                # etiqueta (ej: "positivo")
     probs = model.predict_proba([text])[0]         # probabilidades por clase
     classes = model.classes_                       # etiquetas según el modelo
     # preparar diccionario de probabilidades legible
     prob_dict = {cls: float(round(prob, 4)) for cls, prob in zip(classes, probs)}
-    return render_template("index.html", text=text, prediction=pred, probs=prob_dict)
+    return render_template("ia.html", text=text, prediction=pred, probs=prob_dict)
 
-
-@ia_bp.route("/api/predict", methods=["POST"])
-def api_predict():
-    # Endpoint JSON (útil para Postman / fetch)
-    data = request.get_json(force=True)
-    text = data.get("text", "")
-    if not text:
-        return jsonify({"error": "Campo 'text' requerido"}), 400
-    pred = model.predict([text])[0]
-    probs = model.predict_proba([text])[0]
-    classes = model.classes_
-    prob_dict = {cls: float(round(prob, 4)) for cls, prob in zip(classes, probs)}
-    return jsonify({"text": text, "prediction": pred, "probabilities": prob_dict})
+ 
 
 
 @ia_bp.route("/status", methods=["GET"])

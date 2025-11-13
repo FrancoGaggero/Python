@@ -4,7 +4,9 @@ from joblib import load
 
 import os
 
+
 app = create_app()
+
 
 load_dotenv()
 
