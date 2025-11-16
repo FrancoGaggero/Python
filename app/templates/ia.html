@@ -1,53 +1,234 @@
-<!-- templates/index.html -->
-<!doctype html>
+<!-- templates/ia.html -->
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>Analizador de Sentimiento - Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body { font-family: Arial, sans-serif; max-width:700px; margin:40px auto; }
-        .result { margin-top:20px; padding:12px; border:1px solid #ddd; border-radius:6px; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanSA - Analizador de Sentimiento</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'smoke-white': '#F9FAFB',
+                        'pro-blue': '#2563EB',
+                        'light-blue': '#60A5FA',
+                        'soft-gray': '#94A3B8',
+                        'warm-green': '#22C55E',
+                        'light-teal': '#06B6D4',
+                        'dark-teal': '#1E3A8A',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <link rel="stylesheet" href="../static/css/nav-liquid-glass.css">
+    
+    <style>
+        .sentiment-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .sentiment-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .prob-bar {
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .positive-gradient {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+        
+        .negative-gradient {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        .neutral-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-smoke-white min-h-screen">
+    
+    <!-- Include Navigation Component -->
     {% include 'components/nav.html' %}
 
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-6 max-w-7xl">
+        
+        
 
+        <!-- Error Message -->
+        {% if error %}
+            <div class="sentiment-card bg-red-50 border-2 border-red-200 rounded-2xl p-4 mb-6 fade-in">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-red-800 mb-1">Error en el análisis</h3>
+                        <p class="text-red-700">{{ error }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
-    <h1>Analizador de Sentimiento (Demo)</h1>
-    <form method="post" action= "{{ url_for('ia.predict') }}">
-        <label for="text">Escribí una frase:</label><br>
-        <textarea id="text" name="text" rows="4" cols="60">{{ text or "" }}</textarea><br><br>
-        <button type="submit">Analizar</button>
-    </form>
+        <!-- Layout en 2 columnas cuando hay resultados -->
+        <div class="grid grid-cols-1 {% if prediction %}lg:grid-cols-2{% endif %} gap-6">
+            
+            <!-- Columna 1: Formulario -->
+            <div class="{% if not prediction %}max-w-4xl mx-auto w-full{% endif %}">
+                <div class="sentiment-card bg-white rounded-2xl shadow-xl p-6 border border-gray-100 h-full">
+                    <form method="post" action="{{ url_for('ia.predict') }}" class="space-y-6 h-full flex flex-col">
+                        
+                        <!-- Text Input -->
+                        <div class="flex-1">
+                            <label for="text" class="flex items-center text-lg font-semibold text-dark-teal mb-3">
+                                <svg class="w-5 h-5 mr-2 text-pro-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                                Escribe tu comentario o reseña
+                            </label>
+                            <textarea 
+                                id="text" 
+                                name="text" 
+                                rows="{% if prediction %}12{% else %}6{% endif %}" 
+                                class="w-full h-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-pro-blue focus:ring-2 focus:ring-pro-blue focus:ring-opacity-20 transition-all duration-200 resize-none text-gray-700"
+                                placeholder="Ejemplo: Este producto es excelente, superó todas mis expectativas..."
+                                required>{{ text or "" }}</textarea>
+                         
+                        </div>
 
+                        <!-- Submit Button -->
+                        <div class="flex justify-center">
+                            <button 
+                                type="submit" 
+                                class="bg-gradient-to-r from-pro-blue to-light-teal hover:from-dark-teal hover:to-pro-blue text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2 text-base">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                Analizar Sentimiento
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-    {% if error %}
-        <div class="result" style="color:red">{{ error }}</div>
-    {% endif %}
+            <!-- Columna 2: Resultados (solo si hay predicción) -->
+            {% if prediction %}
+            <div class="fade-in">
+                <div class="sentiment-card bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 h-full">
+                
+                <!-- Header with Sentiment -->
+                <div class="{% if prediction == 'positivo' %}positive-gradient{% elif prediction == 'negativo' %}negative-gradient{% else %}neutral-gradient{% endif %} px-6 py-4">
+                    <div class="flex items-center justify-between text-white">
+                        <div class="flex items-center gap-3">
+                            {% if prediction == 'positivo' %}
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            {% elif prediction == 'negativo' %}
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            {% else %}
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            {% endif %}
+                            <div>
+                                <h2 class="text-2xl font-bold">Sentimiento: {{ prediction|title }}</h2>
+                                <p class="text-white text-opacity-90 text-sm mt-1">Resultado del análisis de IA</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-4xl font-bold">
+                                {% if prediction == 'positivo' %}😊{% elif prediction == 'negativo' %}😞{% else %}😐{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Text Content -->
+                <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                    <h3 class="text-xs font-semibold text-soft-gray uppercase tracking-wide mb-2">Texto Analizado</h3>
+                    <p class="text-base text-gray-700 leading-relaxed italic">"{{ text }}"</p>
+                </div>
 
-    {% if prediction %}
-        <div class="result">
-        <strong>Texto:</strong> {{ text }} <br>
-        <strong>Predicción:</strong> {{ prediction }} <br>
-        <strong>Probabilidades:</strong>
-        <ul>
-            {% for cls, p in probs.items() %}
-            <li>{{ cls }}: {{ p }}</li>
-            {% endfor %}
-        </ul>
+                <!-- Probability Bars -->
+                <div class="px-6 py-4">
+                    <h3 class="text-base font-bold text-dark-teal mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-pro-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Distribución de Probabilidades
+                    </h3>
+                    
+                    <div class="space-y-3">
+                        {% for cls, p in probs.items() %}
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-gray-700 capitalize flex items-center gap-2">
+                                    {% if cls == 'positivo' %}
+                                        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                                    {% elif cls == 'negativo' %}
+                                        <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                                    {% else %}
+                                        <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                                    {% endif %}
+                                    {{ cls|title }}
+                                </span>
+                                <span class="font-bold text-lg {% if cls == 'positivo' %}text-green-600{% elif cls == 'negativo' %}text-red-600{% else %}text-yellow-600{% endif %}">
+                                    {{ (p * 100)|round(2) }}%
+                                </span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden shadow-inner">
+                                <div class="prob-bar h-full rounded-full {% if cls == 'positivo' %}bg-gradient-to-r from-green-400 to-green-600{% elif cls == 'negativo' %}bg-gradient-to-r from-red-400 to-red-600{% else %}bg-gradient-to-r from-yellow-400 to-yellow-600{% endif %} flex items-center justify-end pr-2" 
+                                     style="width: {{ (p * 100)|round(2) }}%">
+                                    <span class="text-xs font-bold text-white drop-shadow">{{ (p * 100)|round(2) }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Info Footer -->
+                <div class="px-8 py-4 bg-light-blue bg-opacity-10 border-t border-gray-200">
+                    <div class="flex items-start gap-3 text-sm text-gray-600">
+                        <svg class="w-5 h-5 text-pro-blue mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        <p class="leading-relaxed">
+                            Este análisis utiliza un modelo de inteligencia artificial entrenado para detectar sentimientos en textos. 
+                            Los resultados son orientativos y pueden variar según el contexto del mensaje.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
-    {% endif %}
+    </main>
 
-
-    
     <!-- Footer -->
     {% include 'components/footer.html' %}
-
+    
     <!-- Librerías externas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script> 
 </body>
