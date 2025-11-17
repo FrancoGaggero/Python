@@ -33,20 +33,20 @@ def login():
         user = Usuario.query.filter_by(nombre=username).first()
         
         if user:
-            print(f"DEBUG: Usuario encontrado - ID: {user.id}, Nombre: {user.nombre}")
+            
             # Verificar la contraseña
             password_check = bcrypt.check_password_hash(user.password, password)
-            print(f"DEBUG: Verificación de contraseña: {password_check}")
+            
             
             if password_check:
                 login_user(user)
-                print(f"DEBUG: Login exitoso para usuario {user.nombre}")
+                
                 return redirect(url_for('main.home'))
             else:
-                print(f"DEBUG: Contraseña incorrecta para usuario {user.nombre}")
+                
                 return render_template('login.html', error="Contraseña incorrecta")
         else:
-            print(f"DEBUG: Usuario no encontrado: {username}")
+            
             return render_template('login.html', error="Usuario no encontrado")
     return render_template('login.html')
 
@@ -118,14 +118,14 @@ def singin():
             database.session.flush()  # Forzar la escritura a la base de datos
             database.session.commit()
             
-            print(f"DEBUG: Usuario registrado exitosamente - ID: {new_user.id}, Nombre: {new_user.nombre}")
+            
             
             # Mensaje de éxito y redirección al login
             return render_template('login.html', success="Registro exitoso. Ya puedes iniciar sesión con tu cuenta.")
             
         except Exception as e:
             database.session.rollback()
-            print(f"ERROR al registrar usuario: {e}")  # Para debugging
+            
             return render_template('singin.html', error="Error al registrar usuario. Inténtalo de nuevo.")
     
     return render_template('singin.html')
