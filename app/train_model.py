@@ -106,14 +106,15 @@ min_length = min(len(positivos), len(negativos), len(neutrales))
 texts = positivos[:min_length] + negativos[:min_length] + neutrales[:min_length]
 labels = (["positivo"] * min_length + ["negativo"] * min_length + ["neutral"] * min_length)
 
-print(f"Dataset creado: {min_length} ejemplos de cada categoría (Total: {len(texts)})")
+
+
 
 # Split entrenamiento / prueba (80% train, 20% test)
 X_train, X_test, y_train, y_test = train_test_split(
     texts, labels, test_size=0.2, random_state=42, stratify=labels
 )
 
-# Pipeline con TfidfVectorizer y LogisticRegression (mejor que Naive Bayes para sentimientos)
+# Pipeline 
 pipeline = Pipeline([
     ("vect", TfidfVectorizer(
         max_features=1000,
@@ -131,24 +132,15 @@ pipeline = Pipeline([
 ])
 
 # Entrenar
-print("Entrenando modelo con {} ejemplos...".format(len(texts)))
+
 pipeline.fit(X_train, y_train)
 
 # Evaluar
 y_pred = pipeline.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 
-print("\n" + "="*60)
-print("RESULTADOS DEL ENTRENAMIENTO")
-print("="*60)
-print(f"\nPrecisión general (Accuracy): {accuracy:.2%}")
-print("\nReporte detallado por categoría:")
-print(classification_report(y_test, y_pred, target_names=['negativo', 'neutral', 'positivo']))
 
-# Pruebas adicionales con frases comunes
-print("\n" + "="*60)
-print("PRUEBAS CON EJEMPLOS")
-print("="*60)
+
 
 test_phrases = [
     "la mejor web",
@@ -167,12 +159,8 @@ for phrase in test_phrases:
     probs = pipeline.predict_proba([phrase])[0]
     classes = pipeline.classes_
     prob_dict = {cls: f"{prob*100:.1f}%" for cls, prob in zip(classes, probs)}
-    print(f"\nFrase: '{phrase}'")
-    print(f"  → Predicción: {pred}")
-    print(f"  → Probabilidades: {prob_dict}")
+
 
 # Guardar el pipeline entrenado
 dump(pipeline, "sentiment_model.joblib")
-print("\n" + "="*60)
-print("✓ Modelo guardado exitosamente en 'sentiment_model.joblib'")
-print("="*60)
+
