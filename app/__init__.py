@@ -74,7 +74,7 @@ def create_app():
             from app.models import Usuario, Categoria, Producto, Carrito, Carrito_detalle, cargarAdmin, cargarTipoUsuario, cargarCliente, cargarCategoriaProductos, cargarProductos
             
             database.create_all()
-            print("Tablas de base de datos creadas correctamente")
+            
             
             #primero se carga los tipos y categorias para evitar errores de llave foranea
             cargarTipoUsuario()
@@ -90,7 +90,7 @@ def create_app():
 
             
         except Exception as e:
-            print(f"Error creando tablas: {e}")
+            print(f"Error al crear las tablas o cargar usuarios: {e}")
     
     # ===================================
     # REGISTRO DE BLUEPRINTS
