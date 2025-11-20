@@ -10,6 +10,8 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    /// ver si los colores son los mismos del otro archivo
+                    
                     colors: {
                         'smoke-white': '#F9FAFB',        // Blanco humo (fondo general)
                         'pro-blue': '#2563EB',           // Azul profesional (elementos principales)
@@ -23,6 +25,7 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-liquid-glass.css') }}">
 </head>
 <body class="bg-smoke-white min-h-screen">
     

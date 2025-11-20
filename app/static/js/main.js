@@ -128,4 +128,12 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('✨ Animaciones CleanSA iniciadas');
     }, 1500);
 
+    /// Glovo tipo PopUp para que el usuario vaya a la parte de IA
+
+    
+
+
+
+
+
 });
